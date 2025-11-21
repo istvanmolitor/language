@@ -207,7 +207,12 @@ abstract class TranslatableModel extends Model
     public function setAttribute($key, $value): void
     {
         if ($this->isTranslatable($key)) {
-            $this->setAttributeTranslation($key, $value);
+            if($value instanceof Multilingual) {
+                $this->setAttributeDto($key, $value);
+            }
+            else {
+                $this->setAttributeTranslation($key, $value);
+            }
         } else {
             parent::setAttribute($key, $value);
         }
