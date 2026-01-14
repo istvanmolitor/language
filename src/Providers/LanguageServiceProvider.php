@@ -10,6 +10,8 @@ use Molitor\Language\Repositories\LanguageRepositoryInterface;
 use Molitor\Language\Repositories\TranslationTypeRepository;
 use Molitor\Language\Repositories\TranslationTypeRepositoryInterface;
 use Molitor\Language\Http\Middleware\SetLocaleFromSession;
+use Molitor\Language\Services\LanguageMenuBuilder;
+use Molitor\Menu\Services\MenuManager;
 
 class LanguageServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,11 @@ class LanguageServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'language');
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
+        // Publish Vue components
+        $this->publishes([
+            __DIR__ . '/../../resources/js' => resource_path('js/pages/Language'),
+        ], 'language-views');
+
         // Register locale middleware in web group
         $this->app['router']->pushMiddlewareToGroup('web', SetLocaleFromSession::class);
     }
@@ -28,5 +35,9 @@ class LanguageServiceProvider extends ServiceProvider
     {
         $this->app->bind(LanguageRepositoryInterface::class, LanguageRepository::class);
         $this->app->bind(TranslationTypeRepositoryInterface::class, TranslationTypeRepository::class);
+
+        $this->callAfterResolving(MenuManager::class, function (MenuManager $menuManager) {
+            $menuManager->addMenuBuilder(new LanguageMenuBuilder());
+        });
     }
 }

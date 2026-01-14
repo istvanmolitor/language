@@ -2,6 +2,7 @@
 
 return [
     'group' => 'Beállítások',
+    'languages' => 'Nyelvek',
     'list' => 'Lista',
     'create' => 'Létrehozás',
     'edit' => 'Szerkesztés',
