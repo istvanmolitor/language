@@ -35,7 +35,7 @@ class LanguageController extends BaseAdminController
             ->paginate(10)
             ->withQueryString();
 
-        return Inertia::render('Language/Admin/Languages/Index', [
+        return Inertia::render('Admin/Languages/Index', [
             'languages' => $languages,
             'filters' => $request->only(['search', 'sort', 'direction']),
         ]);
@@ -44,7 +44,7 @@ class LanguageController extends BaseAdminController
     public function create(): Response
     {
         $allLanguages = Language::all();
-        return Inertia::render('Language/Admin/Languages/Create', [
+        return Inertia::render('Admin/Languages/Create', [
             'availableLanguages' => $allLanguages,
         ]);
     }
@@ -63,7 +63,7 @@ class LanguageController extends BaseAdminController
         }
         $language->save();
 
-        return redirect()->route('language.index')
+        return redirect()->route('language.admin.languages.index')
             ->with('success', __('language::language.messages.created'));
     }
 
@@ -72,7 +72,7 @@ class LanguageController extends BaseAdminController
         $language->load('translations');
         $allLanguages = Language::all();
 
-        return Inertia::render('Language/Admin/Languages/Edit', [
+        return Inertia::render('Admin/Languages/Edit', [
             'language' => $language,
             'availableLanguages' => $allLanguages,
         ]);
@@ -98,7 +98,7 @@ class LanguageController extends BaseAdminController
     public function destroy(Language $language)
     {
         $language->delete();
-        return redirect()->route('language.index')
+        return redirect()->route('language.admin.languages.index')
             ->with('success', __('language::language.messages.deleted'));
     }
 }

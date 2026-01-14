@@ -24,7 +24,7 @@ class LanguageServiceProvider extends ServiceProvider
 
         // Publish Vue components
         $this->publishes([
-            __DIR__ . '/../../resources/js' => resource_path('js/pages/Language'),
+            __DIR__ . '/../../resources/js/pages' => resource_path('js/pages/Admin/Languages'),
         ], 'language-views');
 
         // Register locale middleware in web group

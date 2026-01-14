@@ -3,12 +3,13 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { ref } from 'vue';
 import { trans } from 'laravel-vue-i18n';
 import { route } from '@/lib/route';
+import { AdminFilter } from '@admin/components';
+import { useAdminSort } from '@admin/composables/useAdminSort';
+import Icon from '@/components/Icon.vue';
 
 interface Translation {
     id: number;
@@ -39,7 +40,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const search = ref(props.filters.search || '');
+const { sortBy, getSortIcon } = useAdminSort('language.admin.languages.index', props);
 
 // Translation helper
 const t = (key: string) => trans(key);
@@ -48,37 +49,6 @@ const breadcrumbs: BreadcrumbItem[] = [
     { title: t('language::common.group'), href: '#' },
     { title: t('language::language.title'), href: route('language.admin.languages.index') },
 ];
-
-const handleSearch = () => {
-    router.get(route('language.admin.languages.index'), {
-        search: search.value,
-        sort: props.filters.sort,
-        direction: props.filters.direction,
-    }, {
-        preserveState: true,
-        replace: true,
-    });
-};
-
-const sortBy = (column: string) => {
-    let direction: 'asc' | 'desc' = 'asc';
-    if (props.filters.sort === column && props.filters.direction === 'asc') {
-        direction = 'desc';
-    }
-    router.get(route('language.admin.languages.index'), {
-        search: search.value,
-        sort: column,
-        direction: direction,
-    }, {
-        preserveState: true,
-        replace: true,
-    });
-};
-
-const getSortIcon = (column: string) => {
-    if (props.filters.sort !== column) return '↕️';
-    return props.filters.direction === 'asc' ? '↑' : '↓';
-};
 
 const deleteLanguage = (id: number) => {
     if (confirm(t('language::language.messages.confirm_delete'))) {
@@ -99,26 +69,27 @@ const deleteLanguage = (id: number) => {
                 </Link>
             </div>
 
-            <div class="flex gap-2">
-                <Input
-                    v-model="search"
-                    type="text"
-                    :placeholder="t('language::language.placeholders.search')"
-                    class="max-w-sm"
-                    @keyup.enter="handleSearch"
-                />
-                <Button @click="handleSearch">{{ t('language::language.actions.search') }}</Button>
-            </div>
+            <AdminFilter
+                route-name="language.admin.languages.index"
+                :filters="filters"
+                :placeholder="t('language::language.placeholders.search')"
+            />
 
             <div class="rounded-lg border">
                 <Table>
                     <TableHeader>
                         <TableRow>
                             <TableHead class="cursor-pointer select-none" @click="sortBy('code')">
-                                {{ t('language::language.table.code') }} {{ getSortIcon('code') }}
+                                <div class="flex items-center gap-1">
+                                    {{ t('language::language.table.code') }}
+                                    <Icon :name="getSortIcon('code')" class="h-4 w-4" />
+                                </div>
                             </TableHead>
                             <TableHead class="cursor-pointer select-none" @click="sortBy('name')">
-                                {{ t('language::language.table.name') }} {{ getSortIcon('name') }}
+                                <div class="flex items-center gap-1">
+                                    {{ t('language::language.table.name') }}
+                                    <Icon :name="getSortIcon('name')" class="h-4 w-4" />
+                                </div>
                             </TableHead>
                             <TableHead>{{ t('language::language.table.enabled') }}</TableHead>
                             <TableHead class="text-right">{{ t('language::language.table.actions') }}</TableHead>
@@ -156,7 +127,7 @@ const deleteLanguage = (id: number) => {
                     :key="page"
                     :variant="page === languages.current_page ? 'default' : 'outline'"
                     size="sm"
-                    @click="router.get(route('language.admin.languages.index'), { page, search: search })"
+                    @click="router.get(route('language.admin.languages.index'), { page, ...filters })"
                 >
                     {{ page }}
                 </Button>
