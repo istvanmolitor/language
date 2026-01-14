@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
-import { Head, Link, router } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { trans } from 'laravel-vue-i18n';
 import { route } from '@/lib/route';
-import { AdminFilter, AdminPagination } from '@admin/components';
+import { AdminFilter, AdminPagination, AdminDeleteButton } from '@admin/components';
 import { useAdminSort } from '@admin/composables/useAdminSort';
 import Icon from '@/components/Icon.vue';
 
@@ -49,12 +49,6 @@ const breadcrumbs: BreadcrumbItem[] = [
     { title: t('language::common.group'), href: '#' },
     { title: t('language::language.title'), href: route('language.admin.languages.index') },
 ];
-
-const deleteLanguage = (id: number) => {
-    if (confirm(t('language::language.messages.confirm_delete'))) {
-        router.delete(route('language.admin.languages.destroy', id));
-    }
-};
 </script>
 
 <template>
@@ -111,9 +105,11 @@ const deleteLanguage = (id: number) => {
                                     <Link :href="route('language.admin.languages.edit', lang.id)">
                                         <Button variant="outline" size="sm">{{ t('language::language.actions.edit') }}</Button>
                                     </Link>
-                                    <Button variant="destructive" size="sm" @click="deleteLanguage(lang.id)">
-                                        {{ t('language::language.actions.delete') }}
-                                    </Button>
+                                    <AdminDeleteButton
+                                        :url="route('language.admin.languages.destroy', lang.id)"
+                                        :message="t('language::language.messages.confirm_delete')"
+                                        :button-text="t('language::language.actions.delete')"
+                                    />
                                 </div>
                             </TableCell>
                         </TableRow>
