@@ -7,7 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { trans } from 'laravel-vue-i18n';
 import { route } from '@/lib/route';
-import { AdminFilter } from '@admin/components';
+import { AdminFilter, AdminPagination } from '@admin/components';
 import { useAdminSort } from '@admin/composables/useAdminSort';
 import Icon from '@/components/Icon.vue';
 
@@ -121,17 +121,11 @@ const deleteLanguage = (id: number) => {
                 </Table>
             </div>
 
-            <div v-if="languages.last_page > 1" class="flex justify-center gap-2">
-                <Button
-                    v-for="page in languages.last_page"
-                    :key="page"
-                    :variant="page === languages.current_page ? 'default' : 'outline'"
-                    size="sm"
-                    @click="router.get(route('language.admin.languages.index'), { page, ...filters })"
-                >
-                    {{ page }}
-                </Button>
-            </div>
+            <AdminPagination
+                route-name="language.admin.languages.index"
+                :data="languages"
+                :filters="filters"
+            />
         </div>
     </AppLayout>
 </template>
