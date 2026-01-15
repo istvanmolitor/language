@@ -80,7 +80,7 @@ class LanguageRepository implements LanguageRepositoryInterface
 
     public function getAll(): Collection
     {
-        return $this->language->orderByTranslation('name')->get();
+        return $this->language->joinTranslation()->orderByTranslation('name')->get();
     }
 
     public function getEnabledLanguages(): Collection

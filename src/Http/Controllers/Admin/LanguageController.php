@@ -9,6 +9,7 @@ use Molitor\Admin\Controllers\BaseAdminController;
 use Molitor\Language\Http\Requests\StoreLanguageRequest;
 use Molitor\Language\Http\Requests\UpdateLanguageRequest;
 use Molitor\Language\Models\Language;
+use Molitor\Language\Repositories\LanguageRepositoryInterface;
 
 class LanguageController extends BaseAdminController
 {
@@ -41,11 +42,10 @@ class LanguageController extends BaseAdminController
         ]);
     }
 
-    public function create(): Response
+    public function create(LanguageRepositoryInterface $languageRepository): Response
     {
-        $allLanguages = Language::all();
         return Inertia::render('Admin/Languages/Create', [
-            'availableLanguages' => $allLanguages,
+            'availableLanguages' => $languageRepository->getEnabledLanguages(),
         ]);
     }
 
@@ -67,14 +67,14 @@ class LanguageController extends BaseAdminController
             ->with('success', __('language::language.messages.created'));
     }
 
-    public function edit(Language $language): Response
+    public function edit(Language $language, LanguageRepositoryInterface $languageRepository): Response
     {
         $language->load('translations');
         $allLanguages = Language::all();
 
         return Inertia::render('Admin/Languages/Edit', [
             'language' => $language,
-            'availableLanguages' => $allLanguages,
+            'availableLanguages' => $languageRepository->getEnabledLanguages(),
         ]);
     }
 

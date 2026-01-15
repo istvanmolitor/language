@@ -10,6 +10,7 @@ return [
         'translations' => 'Fordítások',
         'name' => 'Név',
         'language' => 'Nyelv',
+        'native_name' => 'Anyanyelvi név',
     ],
     'table' => [
         'enabled' => 'Engedélyezve',

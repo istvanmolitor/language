@@ -9,6 +9,7 @@ return [
         'code' => 'Code',
         'translations' => 'Translations',
         'name' => 'Name',
+        'native_name' => 'Native name',
     ],
     'table' => [
         'enabled' => 'Enabled',

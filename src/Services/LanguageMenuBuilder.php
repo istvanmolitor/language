@@ -15,7 +15,7 @@ class LanguageMenuBuilder extends MenuBuilder
             return;
         }
 
-        $menu->addItem(__('language::common.languages'), route('language.index'))
+        $menu->addItem(__('language::common.languages'), route('language.admin.languages.index'))
             ->setName('languages.list')
             ->setIcon('language');
     }

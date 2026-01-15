@@ -9,6 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import InputError from '@/components/InputError.vue';
 import { trans } from 'laravel-vue-i18n';
 import { route } from '@/lib/route';
+import TranslatableRepeater from '@language/components/TranslatableRepeater.vue';
 
 interface Translation {
     id: number;
@@ -34,11 +35,24 @@ const props = defineProps<Props>();
 const form = useForm({
     code: props.language.code,
     enabled: props.language.enabled,
-    translations: props.availableLanguages.reduce((acc, lang) => {
-        const translation = props.language.translations.find(t => t.language_id === lang.id);
-        acc[lang.id] = { name: translation ? translation.name : '' };
-        return acc;
-    }, {} as Record<number, { name: string }>)
+    translations: props.availableLanguages.reduce(
+        (acc, lang) => {
+            const translation = props.language.translations.find(
+                (t) => t.language_id === lang.id,
+            );
+            acc[lang.id] = { name: translation ? translation.name : '' };
+            return acc;
+        },
+        {} as Record<number, { name: string }>,
+    ),
+    translatableItems: props.availableLanguages
+        .filter((lang) =>
+            props.language.translations.some((t) => t.language_id === lang.id),
+        )
+        .map((lang) => ({
+            languageId: lang.id,
+            languageCode: lang.code,
+        })),
 });
 
 // Translation helper
@@ -46,12 +60,18 @@ const t = (key: string) => trans(key);
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: t('language::common.group'), href: '#' },
-    { title: t('language::language.title'), href: route('language.index') },
-    { title: t('language::language.edit'), href: route('language.edit', props.language.id) },
+    {
+        title: t('language::language.title'),
+        href: route('language.admin.languages.index'),
+    },
+    {
+        title: t('language::language.edit'),
+        href: route('language.admin.languages.edit', props.language.id),
+    },
 ];
 
 const submit = () => {
-    form.put(route('language.update', props.language.id));
+    form.put(route('language.admin.languages.update', props.language.id));
 };
 </script>
 
@@ -60,11 +80,15 @@ const submit = () => {
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 p-4">
-            <h1 class="text-2xl font-bold">{{ t('language::language.edit') }}</h1>
+            <h1 class="text-2xl font-bold">
+                {{ t('language::language.edit') }}
+            </h1>
 
             <form @submit.prevent="submit" class="max-w-2xl space-y-6">
                 <div class="space-y-2">
-                    <Label for="code">{{ t('language::language.form.code') }}</Label>
+                    <Label for="code">{{
+                        t('language::language.form.code')
+                    }}</Label>
                     <Input
                         id="code"
                         v-model="form.code"
@@ -82,26 +106,40 @@ const submit = () => {
                             :checked="form.enabled"
                             @update:checked="form.enabled = $event"
                         />
-                        <Label for="enabled">{{ t('language::language.form.enabled') }}</Label>
+                        <Label for="enabled">{{
+                            t('language::language.form.enabled')
+                        }}</Label>
                     </div>
                 </div>
 
                 <div class="space-y-4 pt-4">
-                    <h2 class="text-lg font-semibold">{{ t('language::language.form.translations') }}</h2>
-
-                    <div v-for="lang in availableLanguages" :key="lang.id" class="space-y-2 p-4 border rounded">
-                        <Label class="text-sm font-medium">{{ lang.code }}</Label>
-                        <div class="space-y-1">
-                            <Label :for="`name-${lang.id}`">{{ t('language::language.form.name') }}</Label>
-                            <Input
-                                :id="`name-${lang.id}`"
-                                v-model="form.translations[lang.id].name"
-                                type="text"
-                                required
-                            />
-                            <InputError :message="form.errors[`translations.${lang.id}.name`]" />
-                        </div>
-                    </div>
+                    <TranslatableRepeater
+                        v-model="form.translatableItems"
+                        :available-languages="availableLanguages"
+                    >
+                        <template
+                            #default="{ languageId, index, languageCode }"
+                        >
+                            <div class="space-y-1">
+                                <Label :for="`name-${languageId}`">{{
+                                    t('language::language.form.name')
+                                }}</Label>
+                                <Input
+                                    :id="`name-${languageId}`"
+                                    v-model="form.translations[languageId].name"
+                                    type="text"
+                                    required
+                                />
+                                <InputError
+                                    :message="
+                                        form.errors[
+                                            `translations.${languageId}.name`
+                                        ]
+                                    "
+                                />
+                            </div>
+                        </template>
+                    </TranslatableRepeater>
                 </div>
 
                 <div class="flex gap-2">
