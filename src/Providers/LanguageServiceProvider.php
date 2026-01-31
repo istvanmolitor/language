@@ -22,10 +22,10 @@ class LanguageServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'language');
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
-        // Publish Vue components
-        $this->publishes([
-            __DIR__ . '/../../resources/js/pages' => resource_path('js/pages/Admin/Languages'),
-        ], 'language-views');
+        // Load API routes with /api prefix
+        $this->app->make(\Illuminate\Routing\Router::class)
+            ->prefix('api')
+            ->group(__DIR__ . '/../routes/api.php');
 
         // Register locale middleware in web group
         $this->app['router']->pushMiddlewareToGroup('web', SetLocaleFromSession::class);

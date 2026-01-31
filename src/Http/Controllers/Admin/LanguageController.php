@@ -3,53 +3,56 @@
 namespace Molitor\Language\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use Inertia\Response;
-use Molitor\Admin\Controllers\BaseAdminController;
+use Illuminate\Http\JsonResponse;
+use Molitor\Language\Http\Resources\LanguageResource;
+use Molitor\Admin\Traits\HasAdminFilters;
 use Molitor\Language\Http\Requests\StoreLanguageRequest;
 use Molitor\Language\Http\Requests\UpdateLanguageRequest;
 use Molitor\Language\Models\Language;
 use Molitor\Language\Repositories\LanguageRepositoryInterface;
+use Molitor\Admin\Controllers\BaseAdminController;
 
 class LanguageController extends BaseAdminController
 {
-    public function index(Request $request): Response
+    use HasAdminFilters;
+
+    public function index(Request $request): JsonResponse
     {
-        $languages = Language::with('translations')
-            ->when($request->input('search'), function ($query, $search) {
-                $query->where('code', 'like', "%{$search}%")
-                    ->orWhereHas('translations', function ($query) use ($search) {
-                        $query->where('name', 'like', "%{$search}%");
-                    });
-            })
-            ->when($request->input('sort'), function ($query, $sort) use ($request) {
-                $direction = $request->input('direction', 'asc');
-                if ($sort === 'name') {
-                    $query->joinTranslation()
-                        ->orderBy('name', $direction);
-                } else {
-                    $query->orderBy($sort, $direction);
-                }
-            }, function ($query) {
-                $query->orderBy('code', 'asc');
-            })
+        $query = Language::query();
+
+        $languages = $this->applyAdminFilters($query, $request, ['code'])
             ->paginate(10)
             ->withQueryString();
 
-        return Inertia::render('Admin/Languages/Index', [
-            'languages' => $languages,
+        // Betöltjük a fordításokat minden egyes elemhez a TranslatableModel-en keresztül
+        $items = collect($languages->items())->map(function ($language) {
+            $language->loadTranslations();
+            return $language;
+        });
+
+        return response()->json([
+            'data' => LanguageResource::collection($items),
+            'meta' => [
+                'current_page' => $languages->currentPage(),
+                'last_page' => $languages->lastPage(),
+                'per_page' => $languages->perPage(),
+                'total' => $languages->total(),
+            ],
             'filters' => $request->only(['search', 'sort', 'direction']),
         ]);
     }
 
-    public function create(LanguageRepositoryInterface $languageRepository): Response
+    public function create(LanguageRepositoryInterface $languageRepository): JsonResponse
     {
-        return Inertia::render('Admin/Languages/Create', [
-            'availableLanguages' => $languageRepository->getEnabledLanguages(),
+        $availableLanguages = $languageRepository->getEnabledLanguages();
+        $availableLanguages->each->loadTranslations();
+
+        return response()->json([
+            'availableLanguages' => LanguageResource::collection($availableLanguages),
         ]);
     }
 
-    public function store(StoreLanguageRequest $request)
+    public function store(StoreLanguageRequest $request): JsonResponse
     {
         $validated = $request->validated();
 
@@ -59,26 +62,31 @@ class LanguageController extends BaseAdminController
         ]);
 
         foreach ($validated['translations'] as $langId => $translationData) {
-            $language->setAttributeTranslation('name', $translationData['name'], $langId);
+            $language->setAttributeTranslation('name', $translationData['name'], (int)$langId);
         }
         $language->save();
 
-        return redirect()->route('language.admin.languages.index')
-            ->with('success', __('language::language.messages.created'));
+        $language->loadTranslations();
+
+        return response()->json([
+            'data' => new LanguageResource($language),
+            'message' => __('language::language.messages.created'),
+        ], 201);
     }
 
-    public function edit(Language $language, LanguageRepositoryInterface $languageRepository): Response
+    public function edit(Language $language, LanguageRepositoryInterface $languageRepository): JsonResponse
     {
-        $language->load('translations');
-        $allLanguages = Language::all();
+        $language->loadTranslations();
+        $availableLanguages = $languageRepository->getEnabledLanguages();
+        $availableLanguages->each->loadTranslations();
 
-        return Inertia::render('Admin/Languages/Edit', [
-            'language' => $language,
-            'availableLanguages' => $languageRepository->getEnabledLanguages(),
+        return response()->json([
+            'data' => new LanguageResource($language),
+            'availableLanguages' => LanguageResource::collection($availableLanguages),
         ]);
     }
 
-    public function update(UpdateLanguageRequest $request, Language $language)
+    public function update(UpdateLanguageRequest $request, Language $language): JsonResponse
     {
         $validated = $request->validated();
 
@@ -88,17 +96,24 @@ class LanguageController extends BaseAdminController
         ]);
 
         foreach ($validated['translations'] as $langId => $translationData) {
-            $language->setAttributeTranslation('name', $translationData['name'], $langId);
+            $language->setAttributeTranslation('name', $translationData['name'], (int)$langId);
         }
         $language->save();
 
-        return back()->with('success', __('language::language.messages.updated'));
+        $language->loadTranslations();
+
+        return response()->json([
+            'data' => new LanguageResource($language),
+            'message' => __('language::language.messages.updated'),
+        ]);
     }
 
-    public function destroy(Language $language)
+    public function destroy(Language $language): JsonResponse
     {
         $language->delete();
-        return redirect()->route('language.admin.languages.index')
-            ->with('success', __('language::language.messages.deleted'));
+
+        return response()->json([
+            'message' => __('language::language.messages.deleted'),
+        ]);
     }
 }
