@@ -273,14 +273,20 @@ abstract class TranslatableModel extends Model
         return parent::delete();
     }
 
+    public function translationsToArray(): array
+    {
+        $translations = [];
+        /** @var TranslationModel $translationModel */
+        foreach ($this->translations as $translationModel) {
+            $translations[] = $translationModel->toArray();
+        }
+        return $translations;
+    }
+
     public function toArray(): array
     {
         $array = parent::toArray();
-        $array['translations'] = [];
-        /** @var TranslationModel $translationModel */
-        foreach ($this->translations as $translationModel) {
-            $array['translations'][] = $translationModel->toArray();
-        }
+        $array['translations'] = $this->translationsToArray();
         return $array;
     }
 
