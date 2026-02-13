@@ -4,11 +4,16 @@ namespace Molitor\Language\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Molitor\Language\Models\TranslatableModel;
 
 class TranslationsResource extends JsonResource
 {
-    public function __construct(TranslatableModel $resource)
+    /**
+     * Create a new resource instance.
+     *
+     * @param  mixed  $resource
+     * @return void
+     */
+    public function __construct($resource)
     {
         parent::__construct($resource);
     }

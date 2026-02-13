@@ -8,5 +8,8 @@ Route::prefix('admin')
     ->middleware(['api', 'auth:sanctum'])
     ->name('language.admin.')
     ->group(function () {
-        Route::resource('languages', LanguageController::class);
+        Route::get('languages', [LanguageController::class, 'index'])->name('languages.index');
+        Route::resource('languages', LanguageController::class)->except(['index']);
     });
+
+
