@@ -17,7 +17,7 @@ class LanguageServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'language');
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'language');
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
