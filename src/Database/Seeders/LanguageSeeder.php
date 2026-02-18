@@ -1,6 +1,6 @@
 <?php
 
-namespace Molitor\Language\database\seeders;
+namespace Molitor\Language\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Molitor\Language\Models\Language;
