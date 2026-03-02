@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Molitor\Language\Repositories\LanguageRepositoryInterface;
 
-class LanguageController extends Controller
+class LanguageSwitchController extends Controller
 {
     public function __construct(
         protected LanguageRepositoryInterface $languageRepository
@@ -26,3 +26,4 @@ class LanguageController extends Controller
         return Redirect::back();
     }
 }
+

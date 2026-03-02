@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Molitor\Language\Http\Controllers\Admin\LanguageController;
+use Molitor\Language\Http\Controllers\Api\LanguageController;
 
 // Admin routes
 Route::prefix('admin')
