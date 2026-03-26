@@ -11,7 +11,7 @@ use Molitor\Language\Http\Requests\StoreLanguageRequest;
 use Molitor\Language\Http\Requests\UpdateLanguageRequest;
 use Molitor\Language\Models\Language;
 use Molitor\Language\Repositories\LanguageRepositoryInterface;
-use Molitor\Admin\Controllers\BaseAdminController;
+use Molitor\Admin\Http\Controllers\BaseAdminController;
 use OpenApi\Attributes as OA;
 
 class LanguageController extends BaseAdminController
