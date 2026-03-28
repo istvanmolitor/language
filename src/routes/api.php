@@ -9,5 +9,6 @@ Route::prefix('admin')
     ->name('language.admin.')
     ->group(function () {
         Route::get('languages', [LanguageController::class, 'index'])->name('languages.index');
+        Route::get('languages/options', [LanguageController::class, 'options'])->name('languages.options');
         Route::resource('languages', LanguageController::class)->except(['index']);
     });

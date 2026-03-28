@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Molitor\Admin\Http\Controllers\BaseAdminController;
 use Molitor\Admin\Http\Resources\DataTableResource;
+use Molitor\Admin\Http\Resources\OptionsResource;
 use Molitor\Admin\Traits\HasAdminFilters;
 use Molitor\Language\Http\Requests\StoreLanguageRequest;
 use Molitor\Language\Http\Requests\UpdateLanguageRequest;
@@ -206,6 +207,51 @@ class LanguageController extends BaseAdminController
         return response()->json([
             'data' => new LanguageResource($language),
             'message' => __('language::language.messages.updated'),
+        ]);
+    }
+
+    #[OA\Get(
+        path: '/api/admin/languages/options',
+        summary: 'Get languages as options for dropdowns',
+        tags: ['Languages'],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Success',
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(
+                            property: 'data',
+                            type: 'array',
+                            items: new OA\Items(
+                                properties: [
+                                    new OA\Property(property: 'value', type: 'integer'),
+                                    new OA\Property(property: 'label', type: 'string'),
+                                ]
+                            )
+                        ),
+                    ]
+                )
+            ),
+        ]
+    )]
+    public function options(): JsonResponse
+    {
+        $languages = Language::query()
+            ->where('enabled', true)
+            ->orderBy('code')
+            ->get();
+
+        $languages->each->loadTranslations();
+
+        return response()->json([
+            'data' => $languages->map(function ($language) {
+                return new OptionsResource(
+                    $language,
+                    valueField: 'id',
+                    labelField: 'name'
+                );
+            }),
         ]);
     }
 
