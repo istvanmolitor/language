@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace Molitor\Language\Repositories;
 
-use Molitor\Language\Models\Language;
 use Illuminate\Database\Eloquent\Collection;
+use Molitor\Language\Models\Language;
 
 class LanguageRepository implements LanguageRepositoryInterface
 {
     private Language $language;
 
     private array $idCache = [];
+
     private array $codeCache = [];
 
     public function __construct()
     {
-        $this->language = new Language();
+        $this->language = new Language;
     }
 
     protected function cacheLanguage(Language $language): void
@@ -25,55 +26,55 @@ class LanguageRepository implements LanguageRepositoryInterface
         $this->codeCache[$language->code] = $language;
     }
 
-    public function getIdByCode(string $code): int|null
+    public function getIdByCode(string $code): ?int
     {
         return $this->getByCode($code)?->id;
     }
 
-    public function getCodeById(int $id): string|null
+    public function getCodeById(int $id): ?string
     {
         return $this->getById($id)?->code;
     }
 
-    public function getById(int $id): Language|null
+    public function getById(int $id): ?Language
     {
-        if (!array_key_exists($id, $this->idCache)) {
+        if (! array_key_exists($id, $this->idCache)) {
             $language = $this->language->where('id', $id)->first();
             if ($language) {
                 $this->cacheLanguage($language);
-            }
-            else {
+            } else {
                 $this->idCache[$id] = null;
             }
         }
+
         return $this->idCache[$id];
     }
 
-    public function getByCode(string $code): Language|null
+    public function getByCode(string $code): ?Language
     {
-        if (!array_key_exists($code, $this->codeCache)) {
+        if (! array_key_exists($code, $this->codeCache)) {
             $language = $this->language->where('code', $code)->first();
             if ($language) {
                 $this->cacheLanguage($language);
-            }
-            else {
+            } else {
                 $this->codeCache[$code] = null;
             }
         }
+
         return $this->codeCache[$code];
     }
 
-    public function getDefaultLanguage(): Language|null
+    public function getDefaultLanguage(): ?Language
     {
         return $this->getByCode(config('app.locale'));
     }
 
-    public function getDefaultId(): int|null
+    public function getDefaultId(): ?int
     {
         return $this->getDefaultLanguage()?->id;
     }
 
-    public function getDefaultLanguageCode(): string|null
+    public function getDefaultLanguageCode(): ?string
     {
         return $this->getDefaultLanguage()?->code;
     }

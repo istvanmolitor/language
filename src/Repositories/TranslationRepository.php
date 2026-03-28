@@ -12,7 +12,7 @@ class TranslationRepository implements TranslationRepositoryInterface
 
     public function __construct()
     {
-        $this->translation = new Translation();
+        $this->translation = new Translation;
     }
 
     public function setTranslationValue(int $languageId, int $translationTypeId, int $foreignId, string $value): void
@@ -22,8 +22,8 @@ class TranslationRepository implements TranslationRepositoryInterface
             ->where('foreign_id', $foreignId)
             ->first();
 
-        if (!$translation) {
-            $translation = new Translation();
+        if (! $translation) {
+            $translation = new Translation;
             $translation->language_id = $languageId;
             $translation->translation_type_id = $translationTypeId;
             $translation->foreign_id = $foreignId;
@@ -42,6 +42,7 @@ class TranslationRepository implements TranslationRepositoryInterface
         if ($translation) {
             return $translation->value;
         }
+
         return null;
     }
 

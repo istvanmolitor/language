@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Molitor\Language\Repositories;
 
-use Molitor\Language\Models\Translation;
-
 interface TranslationRepositoryInterface
 {
     public function setTranslationValue(int $languageId, int $translationTypeId, int $foreignId, string $value): void;

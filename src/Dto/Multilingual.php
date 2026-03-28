@@ -28,12 +28,12 @@ class Multilingual
         return $this->getTranslations();
     }
 
-    public function set(string $language, string|null $text): void
+    public function set(string $language, ?string $text): void
     {
-        $this->translations[$language] = (string)$text;
+        $this->translations[$language] = (string) $text;
     }
 
-    public function __set(string $name, string|null $value): void
+    public function __set(string $name, ?string $value): void
     {
         $this->set($name, $value);
     }

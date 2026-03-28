@@ -9,7 +9,9 @@ use Molitor\Language\Repositories\LanguageRepositoryInterface;
 class TranslatedText implements ValidationRule
 {
     const OPTIONAL = 0;
+
     const MIN_ONE_REQUIRED = 1;
+
     const ALL_REQUIRED = 2;
 
     protected LanguageRepositoryInterface $languageRepository;
@@ -26,25 +28,27 @@ class TranslatedText implements ValidationRule
         foreach ($value as $item) {
             if (is_array($item) &&
                 isset($item['value']) &&
-                !empty($item['value']) &&
+                ! empty($item['value']) &&
                 isset(
                     $item['language_id']
                 )) {
-                $filteredValues[(int)$item['language_id']] = (string)$item['value'];
+                $filteredValues[(int) $item['language_id']] = (string) $item['value'];
             }
         }
+
         return $filteredValues;
     }
 
     /**
      * Run the validation rule.
      *
-     * @param \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString $fail
+     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (!is_array($value)) {
-            $fail('The ' . $attribute . ' field must be a valid translation.');
+        if (! is_array($value)) {
+            $fail('The '.$attribute.' field must be a valid translation.');
+
             return;
         }
 
@@ -56,7 +60,7 @@ class TranslatedText implements ValidationRule
                 $countOfValidValues++;
             } else {
                 if ($this->required === self::ALL_REQUIRED) {
-                    $fail('A ' . $language->name . ' kötelező.');
+                    $fail('A '.$language->name.' kötelező.');
                 }
             }
         }

@@ -6,25 +6,25 @@ use Illuminate\Foundation\Http\FormRequest;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(
-    schema: "StoreLanguageRequest",
-    title: "Store Language Request",
-    description: "Data for creating a language",
-    required: ["code", "native_name", "translations"],
+    schema: 'StoreLanguageRequest',
+    title: 'Store Language Request',
+    description: 'Data for creating a language',
+    required: ['code', 'native_name', 'translations'],
     properties: [
-        new OA\Property(property: "code", type: "string", example: "en"),
-        new OA\Property(property: "enabled", type: "boolean", example: true),
-        new OA\Property(property: "native_name", type: "string", example: "English"),
+        new OA\Property(property: 'code', type: 'string', example: 'en'),
+        new OA\Property(property: 'enabled', type: 'boolean', example: true),
+        new OA\Property(property: 'native_name', type: 'string', example: 'English'),
         new OA\Property(
-            property: "translations",
-            type: "object",
+            property: 'translations',
+            type: 'object',
             additionalProperties: new OA\AdditionalProperties(
-                type: "object",
+                type: 'object',
                 properties: [
-                    new OA\Property(property: "name", type: "string")
+                    new OA\Property(property: 'name', type: 'string'),
                 ]
             ),
-            example: ["1" => ["name" => "Angol"]]
-        )
+            example: ['1' => ['name' => 'Angol']]
+        ),
     ]
 )]
 class StoreLanguageRequest extends FormRequest

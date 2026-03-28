@@ -13,8 +13,7 @@ class LanguageSwitchController extends Controller
 {
     public function __construct(
         protected LanguageRepositoryInterface $languageRepository
-    ) {
-    }
+    ) {}
 
     public function switch(string $code): RedirectResponse
     {
@@ -26,4 +25,3 @@ class LanguageSwitchController extends Controller
         return Redirect::back();
     }
 }
-

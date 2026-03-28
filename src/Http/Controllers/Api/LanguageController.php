@@ -2,16 +2,16 @@
 
 namespace Molitor\Language\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Molitor\Language\Http\Resources\LanguageResource;
+use Illuminate\Http\Request;
+use Molitor\Admin\Http\Controllers\BaseAdminController;
 use Molitor\Admin\Http\Resources\DataTableResource;
 use Molitor\Admin\Traits\HasAdminFilters;
 use Molitor\Language\Http\Requests\StoreLanguageRequest;
 use Molitor\Language\Http\Requests\UpdateLanguageRequest;
+use Molitor\Language\Http\Resources\LanguageResource;
 use Molitor\Language\Models\Language;
 use Molitor\Language\Repositories\LanguageRepositoryInterface;
-use Molitor\Admin\Http\Controllers\BaseAdminController;
 use OpenApi\Attributes as OA;
 
 class LanguageController extends BaseAdminController
@@ -19,33 +19,33 @@ class LanguageController extends BaseAdminController
     use HasAdminFilters;
 
     #[OA\Get(
-        path: "/api/admin/languages",
-        summary: "List all languages",
-        tags: ["Languages"],
+        path: '/api/admin/languages',
+        summary: 'List all languages',
+        tags: ['Languages'],
         responses: [
             new OA\Response(
                 response: 200,
-                description: "Success",
+                description: 'Success',
                 content: new OA\JsonContent(
                     properties: [
                         new OA\Property(
-                            property: "data",
-                            type: "array",
-                            items: new OA\Items(ref: "#/components/schemas/Language")
+                            property: 'data',
+                            type: 'array',
+                            items: new OA\Items(ref: '#/components/schemas/Language')
                         ),
                         new OA\Property(
-                            property: "meta",
-                            type: "object",
+                            property: 'meta',
+                            type: 'object',
                             properties: [
-                                new OA\Property(property: "current_page", type: "integer"),
-                                new OA\Property(property: "last_page", type: "integer"),
-                                new OA\Property(property: "per_page", type: "integer"),
-                                new OA\Property(property: "total", type: "integer")
+                                new OA\Property(property: 'current_page', type: 'integer'),
+                                new OA\Property(property: 'last_page', type: 'integer'),
+                                new OA\Property(property: 'per_page', type: 'integer'),
+                                new OA\Property(property: 'total', type: 'integer'),
                             ]
-                        )
+                        ),
                     ]
                 )
-            )
+            ),
         ]
     )]
     public function index(Request $request): JsonResponse
@@ -58,10 +58,12 @@ class LanguageController extends BaseAdminController
         // Betöltjük a fordításokat minden egyes elemhez a TranslatableModel-en keresztül
         $items = collect($languages->items())->map(function ($language) {
             $language->loadTranslations();
+
             return $language;
         });
 
         $languages->setCollection($items);
+
         return response()->json(new DataTableResource($languages, LanguageResource::class, $request->only(['search', 'sort', 'direction'])));
     }
 
@@ -76,25 +78,25 @@ class LanguageController extends BaseAdminController
     }
 
     #[OA\Post(
-        path: "/api/admin/languages",
-        summary: "Store a new language",
-        tags: ["Languages"],
+        path: '/api/admin/languages',
+        summary: 'Store a new language',
+        tags: ['Languages'],
         requestBody: new OA\RequestBody(
             required: true,
-            content: new OA\JsonContent(ref: "#/components/schemas/StoreLanguageRequest")
+            content: new OA\JsonContent(ref: '#/components/schemas/StoreLanguageRequest')
         ),
         responses: [
             new OA\Response(
                 response: 201,
-                description: "Created",
+                description: 'Created',
                 content: new OA\JsonContent(
                     properties: [
-                        new OA\Property(property: "data", ref: "#/components/schemas/Language"),
-                        new OA\Property(property: "message", type: "string")
+                        new OA\Property(property: 'data', ref: '#/components/schemas/Language'),
+                        new OA\Property(property: 'message', type: 'string'),
                     ]
                 )
             ),
-            new OA\Response(response: 422, description: "Validation error")
+            new OA\Response(response: 422, description: 'Validation error'),
         ]
     )]
     public function store(StoreLanguageRequest $request): JsonResponse
@@ -107,10 +109,10 @@ class LanguageController extends BaseAdminController
         ]);
 
         // Mentjük a saját nevét a saját nyelvén
-        $language->setAttributeTranslation('name', $validated['native_name'], (int)$language->id);
+        $language->setAttributeTranslation('name', $validated['native_name'], (int) $language->id);
 
         foreach ($validated['translations'] as $langId => $translationData) {
-            $language->setAttributeTranslation('name', $translationData['name'], (int)$langId);
+            $language->setAttributeTranslation('name', $translationData['name'], (int) $langId);
         }
         $language->save();
 
@@ -123,28 +125,28 @@ class LanguageController extends BaseAdminController
     }
 
     #[OA\Get(
-        path: "/api/admin/languages/{language}/edit",
-        summary: "Show form for editing a language",
-        tags: ["Languages"],
+        path: '/api/admin/languages/{language}/edit',
+        summary: 'Show form for editing a language',
+        tags: ['Languages'],
         parameters: [
-            new OA\Parameter(name: "language", in: "path", required: true, schema: new OA\Schema(type: "integer"))
+            new OA\Parameter(name: 'language', in: 'path', required: true, schema: new OA\Schema(type: 'integer')),
         ],
         responses: [
             new OA\Response(
                 response: 200,
-                description: "Success",
+                description: 'Success',
                 content: new OA\JsonContent(
                     properties: [
-                        new OA\Property(property: "data", ref: "#/components/schemas/Language"),
+                        new OA\Property(property: 'data', ref: '#/components/schemas/Language'),
                         new OA\Property(
-                            property: "availableLanguages",
-                            type: "array",
-                            items: new OA\Items(ref: "#/components/schemas/Language")
-                        )
+                            property: 'availableLanguages',
+                            type: 'array',
+                            items: new OA\Items(ref: '#/components/schemas/Language')
+                        ),
                     ]
                 )
             ),
-            new OA\Response(response: 404, description: "Not found")
+            new OA\Response(response: 404, description: 'Not found'),
         ]
     )]
     public function edit(Language $language, LanguageRepositoryInterface $languageRepository): JsonResponse
@@ -160,29 +162,29 @@ class LanguageController extends BaseAdminController
     }
 
     #[OA\Put(
-        path: "/api/admin/languages/{language}",
-        summary: "Update a language",
-        tags: ["Languages"],
+        path: '/api/admin/languages/{language}',
+        summary: 'Update a language',
+        tags: ['Languages'],
         parameters: [
-            new OA\Parameter(name: "language", in: "path", required: true, schema: new OA\Schema(type: "integer"))
+            new OA\Parameter(name: 'language', in: 'path', required: true, schema: new OA\Schema(type: 'integer')),
         ],
         requestBody: new OA\RequestBody(
             required: true,
-            content: new OA\JsonContent(ref: "#/components/schemas/UpdateLanguageRequest")
+            content: new OA\JsonContent(ref: '#/components/schemas/UpdateLanguageRequest')
         ),
         responses: [
             new OA\Response(
                 response: 200,
-                description: "Success",
+                description: 'Success',
                 content: new OA\JsonContent(
                     properties: [
-                        new OA\Property(property: "data", ref: "#/components/schemas/Language"),
-                        new OA\Property(property: "message", type: "string")
+                        new OA\Property(property: 'data', ref: '#/components/schemas/Language'),
+                        new OA\Property(property: 'message', type: 'string'),
                     ]
                 )
             ),
-            new OA\Response(response: 422, description: "Validation error"),
-            new OA\Response(response: 404, description: "Not found")
+            new OA\Response(response: 422, description: 'Validation error'),
+            new OA\Response(response: 404, description: 'Not found'),
         ]
     )]
     public function update(UpdateLanguageRequest $request, Language $language): JsonResponse
@@ -195,7 +197,7 @@ class LanguageController extends BaseAdminController
         ]);
 
         foreach ($validated['translations'] as $langId => $translationData) {
-            $language->setAttributeTranslation('name', $translationData['name'], (int)$langId);
+            $language->setAttributeTranslation('name', $translationData['name'], (int) $langId);
         }
         $language->save();
 

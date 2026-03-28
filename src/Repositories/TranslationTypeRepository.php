@@ -9,16 +9,17 @@ use Molitor\Language\Models\TranslationType;
 class TranslationTypeRepository implements TranslationTypeRepositoryInterface
 {
     private TranslationType $translationType;
+
     private array $nameCache = [];
 
     public function __construct()
     {
-        $this->translationType = new TranslationType();
+        $this->translationType = new TranslationType;
     }
 
     public function getMyName(string $name): TranslationType
     {
-        if (!array_key_exists($name, $this->nameCache)) {
+        if (! array_key_exists($name, $this->nameCache)) {
             $this->nameCache[$name] = $this->translationType->where('name', $name)->first();
             if ($this->nameCache[$name] === null) {
                 $this->nameCache[$name] = $this->translationType->create([
@@ -26,8 +27,7 @@ class TranslationTypeRepository implements TranslationTypeRepositoryInterface
                 ]);
             }
         }
+
         return $this->nameCache[$name];
     }
-
-
 }

@@ -14,22 +14,27 @@ use Molitor\Language\Repositories\LanguageRepositoryInterface;
 
 abstract class TranslatableModel extends Model
 {
-    private TranslationModel|null $translationModel = null;
-    private int|null $currentLanguageId = null;
-    private array|null $translationObjects = null;
+    private ?TranslationModel $translationModel = null;
+
+    private ?int $currentLanguageId = null;
+
+    private ?array $translationObjects = null;
+
     private array $codeIdMap = [];
+
     private array $idCodeMap = [];
 
     /****************************************************************************/
 
-    public abstract function getTranslationModelClass(): string;
+    abstract public function getTranslationModelClass(): string;
 
     public function getTranslationModel(): TranslationModel
     {
         if ($this->translationModel === null) {
             $translationModelClass = $this->getTranslationModelClass();
-            $this->translationModel = new $translationModelClass();
+            $this->translationModel = new $translationModelClass;
         }
+
         return $this->translationModel;
     }
 
@@ -53,12 +58,12 @@ abstract class TranslatableModel extends Model
         return $this->getTranslationModel()->getTable();
     }
 
-    /*Translations***************************************************************************/
+    /* Translations************************************************************************** */
 
     public function translation(): HasOne
     {
         return $this->hasOne($this->getTranslationModelClass(), $this->getTranslationForeignKey())
-            ->where($this->getTranslationTable() . '.language_id', $this->getCurrentLanguageId());
+            ->where($this->getTranslationTable().'.language_id', $this->getCurrentLanguageId());
     }
 
     public function translations(): HasMany
@@ -83,13 +88,12 @@ abstract class TranslatableModel extends Model
         if ($this->translationObjects === null) {
             $this->loadTranslations();
         }
+
         return $this->translationObjects;
     }
 
     /**
      * Returns the translation record for the given language.
-     * @param int|string|null $language
-     * @return TranslationModel
      */
     public function getTranslation(int|string|null $language = null): TranslationModel
     {
@@ -109,7 +113,7 @@ abstract class TranslatableModel extends Model
     {
         $className = $this->getTranslationModelClass();
         /** @var TranslationModel $translationModel */
-        $translationModel = new $className();
+        $translationModel = new $className;
 
         $id = $this->getKey();
         if ($this->exists && $id !== null) {
@@ -118,19 +122,21 @@ abstract class TranslatableModel extends Model
 
         $translationModel->setAttribute('language_id', $languageId);
         $this->translationObjects[$languageId] = $translationModel;
+
         return $this->translationObjects[$languageId];
     }
 
-    /*Current***************************************************************************/
+    /* Current************************************************************************** */
 
     public function getCurrentLanguageId(): int
     {
         if ($this->currentLanguageId === null) {
             $this->currentLanguageId = $this->getDefaultId();
             if ($this->currentLanguageId === null) {
-                throw new LanguageNotExistsException();
+                throw new LanguageNotExistsException;
             }
         }
+
         return $this->currentLanguageId;
     }
 
@@ -154,18 +160,19 @@ abstract class TranslatableModel extends Model
         return $this->getTranslation();
     }
 
-    /*Scopes***************************************************************************/
+    /* Scopes************************************************************************** */
 
     public function scopeJoinTranslation(Builder $query, int|string|null $language = null): Builder
     {
         $languageId = $this->makeLanguageId($language);
         $translationTable = $this->getTranslationTable();
+
         return $query->leftJoin($translationTable, function ($join) use ($translationTable, $languageId) {
             $join->on(
-                $translationTable . '.' . $this->getTranslationForeignKey(),
+                $translationTable.'.'.$this->getTranslationForeignKey(),
                 '=',
-                $this->getTable() . '.id'
-            )->where($translationTable . '.language_id', $languageId);
+                $this->getTable().'.id'
+            )->where($translationTable.'.language_id', $languageId);
         })->with('translations');
     }
 
@@ -183,16 +190,18 @@ abstract class TranslatableModel extends Model
     {
         $foreignKey = $this->getTranslationForeignKey();
         $ids = $this->getTranslationModel()->whereMultilingual($fieldName, $value)->select($foreignKey)->get()->pluck($foreignKey)->toArray();
+
         return $query->whereIn($this->primaryKey, $ids);
     }
 
     public function scopeSelectBase(Builder $query): Builder
     {
         $base = $query->getModel()->getTable();
-        return $query->select($base . ".*");
+
+        return $query->select($base.'.*');
     }
 
-    /*Attributes***************************************************************************/
+    /* Attributes************************************************************************** */
 
     public function setAttributeTranslation(string $key, string $value, int|string|null $language = null): void
     {
@@ -207,10 +216,9 @@ abstract class TranslatableModel extends Model
     public function setAttribute($key, $value): void
     {
         if ($this->isTranslatable($key)) {
-            if($value instanceof Multilingual) {
+            if ($value instanceof Multilingual) {
                 $this->setAttributeDto($key, $value);
-            }
-            else {
+            } else {
                 $this->setAttributeTranslation($key, $value);
             }
         } else {
@@ -229,21 +237,22 @@ abstract class TranslatableModel extends Model
 
     public function getAttributeDto(string $key): Multilingual
     {
-        $dto = new Multilingual();
+        $dto = new Multilingual;
         /** @var TranslationModel $translationModel */
         foreach ($this->getTranslations() as $languageId => $translation) {
             $value = $translation->getAttribute($key);
-            if (!empty($value)) {
+            if (! empty($value)) {
                 $dto->set($this->getCodeById($languageId), $value);
             }
         }
+
         return $dto;
     }
 
     public function setAttributeDto(string $key, Multilingual $dto): void
     {
         foreach ($dto->getTranslations() as $code => $value) {
-            if (!empty($value)) {
+            if (! empty($value)) {
                 $this->setAttributeTranslation($key, $value, $code);
             }
         }
@@ -254,13 +263,14 @@ abstract class TranslatableModel extends Model
     public function save(array $options = []): bool
     {
         $saved = parent::save($options);
-        if($saved) {
+        if ($saved) {
             /** @var TranslationModel $translationModel */
             foreach ($this->getTranslations() as $translationModel) {
                 $translationModel->setAttribute($this->getTranslationForeignKey(), $this->getKey());
                 $translationModel->save();
             }
         }
+
         return $saved;
     }
 
@@ -270,6 +280,7 @@ abstract class TranslatableModel extends Model
         foreach ($this->getTranslations() as $translationModel) {
             $translationModel->delete();
         }
+
         return parent::delete();
     }
 
@@ -280,6 +291,7 @@ abstract class TranslatableModel extends Model
         foreach ($this->translations as $translationModel) {
             $translations[] = $translationModel->toArray();
         }
+
         return $translations;
     }
 
@@ -287,10 +299,11 @@ abstract class TranslatableModel extends Model
     {
         $array = parent::toArray();
         $array['translations'] = $this->translationsToArray();
+
         return $array;
     }
 
-    /*Helper***************************************************************************/
+    /* Helper************************************************************************** */
 
     private function addMap(int $id, string $code): void
     {
@@ -300,35 +313,36 @@ abstract class TranslatableModel extends Model
 
     private function getIdByCode(string $code): int
     {
-        if (!array_key_exists($code, $this->codeIdMap)) {
+        if (! array_key_exists($code, $this->codeIdMap)) {
             $id = app(LanguageRepositoryInterface::class)->getIdByCode($code);
             $this->addMap($id, $code);
         }
+
         return $this->codeIdMap[$code];
     }
 
     private function getCodeById(int $id): string
     {
-        if (!array_key_exists($id, $this->idCodeMap)) {
+        if (! array_key_exists($id, $this->idCodeMap)) {
             $code = app(LanguageRepositoryInterface::class)->getCodeById($id);
             $this->addMap($id, $code);
         }
+
         return $this->idCodeMap[$id];
     }
 
-    private function getDefaultId(): int|null
+    private function getDefaultId(): ?int
     {
         $defaultLanguage = app(LanguageRepositoryInterface::class)->getDefaultLanguage();
         if ($defaultLanguage === null) {
             return null;
         }
         $this->addMap($defaultLanguage->id, $defaultLanguage->code);
+
         return $defaultLanguage->id;
     }
 
     /**
-     * @param int|string|null $value
-     * @return int
      * @throws LanguageNotExistsException
      */
     private function makeLanguageId(int|string|null $value): int
@@ -345,9 +359,9 @@ abstract class TranslatableModel extends Model
     private function getFieldName(string $key): string
     {
         if ($this->isTranslatable($key)) {
-            return $this->getTranslationTable() . '.' . $key;
+            return $this->getTranslationTable().'.'.$key;
         } else {
-            return $this->getTable() . '.' . $key;
+            return $this->getTable().'.'.$key;
         }
     }
 }

@@ -11,5 +11,3 @@ Route::prefix('admin')
         Route::get('languages', [LanguageController::class, 'index'])->name('languages.index');
         Route::resource('languages', LanguageController::class)->except(['index']);
     });
-
-

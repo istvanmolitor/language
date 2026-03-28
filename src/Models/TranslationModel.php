@@ -9,11 +9,11 @@ use Molitor\Language\Dto\Multilingual;
 
 abstract class TranslationModel extends Model
 {
-    public abstract function getTranslatableModelClass(): string;
+    abstract public function getTranslatableModelClass(): string;
 
-    public abstract function getTranslationForeignKey(): string;
+    abstract public function getTranslationForeignKey(): string;
 
-    public abstract function getTranslatableFields(): array;
+    abstract public function getTranslatableFields(): array;
 
     public function translatable(): BelongsTo
     {
@@ -25,15 +25,16 @@ abstract class TranslationModel extends Model
         return $this->belongsTo(Language::class, 'language_id');
     }
 
-    public function getCode(): string {
-        return (string)$this->language;
+    public function getCode(): string
+    {
+        return (string) $this->language;
     }
 
     public function getFillable(): array
     {
         return array_merge([
             $this->getTranslationForeignKey(),
-            'language_id'
+            'language_id',
         ], $this->getTranslatableFields());
     }
 
@@ -42,19 +43,19 @@ abstract class TranslationModel extends Model
     public function scopeWhereMultilingual(Builder $query, string $fieldName, Multilingual $value): Builder
     {
         $translatableFields = $this->getTranslatableFields();
-        if(!in_array($fieldName, $translatableFields)) {
+        if (! in_array($fieldName, $translatableFields)) {
             return $query->whereRaw('0 = 1');
         }
 
         $tableName = $this->getTable();
         $translatedValue = $value->getTranslations();
 
-        return $query->join('languages', 'languages.id', '=', $tableName . '.language_id')
+        return $query->join('languages', 'languages.id', '=', $tableName.'.language_id')
             ->where(function ($query) use ($tableName, $fieldName, $translatedValue) {
                 foreach ($translatedValue as $code => $value) {
                     $query->orWhere(function ($query) use ($tableName, $fieldName, $code, $value) {
                         $query->where('languages.code', $code)
-                            ->where($tableName . '.' . $fieldName, $value);
+                            ->where($tableName.'.'.$fieldName, $value);
                     });
                 }
             });
