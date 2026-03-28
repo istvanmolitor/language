@@ -46,8 +46,8 @@ class LanguageResource extends JsonResource
             'enabled' => (bool)$this->enabled,
             'name' => $this->name, // a TranslatableModel miatt ez az aktuális nyelven adja vissza
             'translations' => new TranslationsResource($this->getTranslations()),
-            'created_at' => $this->created_at?->toIso8601String(),
-            'updated_at' => $this->updated_at?->toIso8601String(),
+            'created_at' => $this->created_at?->toDateTimeString(),
+            'updated_at' => $this->updated_at?->toDateTimeString(),
         ];
     }
 }
