@@ -4,6 +4,7 @@ namespace Molitor\Language\Services;
 
 use Exception;
 use Molitor\Language\Dto\Multilingual;
+use Molitor\Language\Models\Language;
 use Molitor\Language\Models\TranslatableModel;
 use Molitor\Language\Repositories\LanguageRepositoryInterface;
 
@@ -14,6 +15,16 @@ class LanguageService
     public function __construct(
         protected LanguageRepositoryInterface $languageRepository,
     ) {}
+
+    public function getCurrentLanguage(): ?Language
+    {
+        $language = $this->languageRepository->getByCode(app()->getLocale());
+        if($language) {
+            return $language;
+        }
+
+        return $this->languageRepository->getDefaultLanguage();
+    }
 
     protected function getTranslatableModel(string $translatableModelClass): TranslatableModel
     {

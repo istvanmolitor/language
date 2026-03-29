@@ -2,6 +2,7 @@
 
 namespace Molitor\Language\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Molitor\Language\Http\Middleware\SetLocaleFromSession;
 use Molitor\Language\Repositories\LanguageRepository;
@@ -9,6 +10,7 @@ use Molitor\Language\Repositories\LanguageRepositoryInterface;
 use Molitor\Language\Repositories\TranslationTypeRepository;
 use Molitor\Language\Repositories\TranslationTypeRepositoryInterface;
 use Molitor\Language\Services\LanguageMenuBuilder;
+use Molitor\Language\View\Components\LanguageSwitcher;
 use Molitor\Menu\Services\MenuManager;
 
 class LanguageServiceProvider extends ServiceProvider
@@ -27,6 +29,9 @@ class LanguageServiceProvider extends ServiceProvider
 
         // Register locale middleware in web group
         $this->app['router']->pushMiddlewareToGroup('web', SetLocaleFromSession::class);
+
+        // Register Blade components
+        Blade::component('language-switcher', LanguageSwitcher::class);
     }
 
     public function register()
