@@ -345,14 +345,16 @@ abstract class TranslatableModel extends Model
     /**
      * @throws LanguageNotExistsException
      */
-    private function makeLanguageId(int|string|null $value): int
+    private function makeLanguageId(int|string|Language|null $value): int
     {
         if ($value === null) {
             return $this->getCurrentLanguageId();
         } elseif (is_string($value)) {
             return $this->getIdByCode($value);
+        } elseif ($value instanceof Language) {
+            return (int)$value->id;
         } else {
-            return $value;
+            return (int)$value;
         }
     }
 

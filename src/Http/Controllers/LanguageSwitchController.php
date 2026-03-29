@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Molitor\Language\Repositories\LanguageRepositoryInterface;
+use Molitor\Language\Services\LanguageService;
 
 class LanguageSwitchController extends Controller
 {
@@ -19,9 +20,11 @@ class LanguageSwitchController extends Controller
     {
         $language = $this->languageRepository->getByCode($code);
         if ($language && (int) $language->enabled === 1) {
-            session(['locale' => $language->code]);
+            /** @var LanguageService $languageService */
+            $languageService = app(LanguageService::class);
+            $languageService->setLanguage($language);
         }
 
-        return Redirect::back();
+        return Redirect::to('/');
     }
 }

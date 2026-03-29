@@ -7,25 +7,25 @@ namespace Molitor\Language\View\Components;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
+use Molitor\Language\Models\Language;
 use Molitor\Language\Repositories\LanguageRepositoryInterface;
+use Molitor\Language\Services\LanguageService;
 
 class LanguageSwitcher extends Component
 {
     public Collection $enabledLanguages;
 
-    public string $currentLocale;
-
-    public string $uid;
+    public Language $currentLanguage;
 
     /**
      * Create a new component instance.
      */
     public function __construct(
-        protected LanguageRepositoryInterface $languageRepository
+        protected LanguageRepositoryInterface $languageRepository,
+        protected LanguageService $languageService
     ) {
         $this->enabledLanguages = $this->languageRepository->getEnabledLanguages();
-        $this->currentLocale = app()->getLocale();
-        $this->uid = 'lang-switcher-'.uniqid();
+        $this->currentLanguage = $this->languageService->getCurrentLanguage();
     }
 
     /**

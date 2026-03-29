@@ -9,6 +9,8 @@ use Molitor\Language\Models\Language;
 
 interface LanguageRepositoryInterface
 {
+    public function getLanguage(int|string|Language|null $language): ?Language;
+
     public function getIdByCode(string $code): ?int;
 
     public function getCodeById(int $id): ?string;

@@ -6,14 +6,19 @@ namespace Molitor\Language\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Molitor\Language\Services\LanguageService;
 use Symfony\Component\HttpFoundation\Response;
 
 class SetLocaleFromSession
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = session('locale', config('app.locale'));
-        app()->setLocale($locale);
+        /** @var LanguageService $languageService */
+        $languageService = app()->make(LanguageService::class);
+        $language = $languageService->getLanguage();
+        if($language) {
+            app()->setLocale($language->code);
+        }
 
         return $next($request);
     }

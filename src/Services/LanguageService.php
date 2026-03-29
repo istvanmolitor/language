@@ -84,4 +84,28 @@ class LanguageService
 
         return $translatableModel->where('id', $translatableId)->first();
     }
+
+    public function setLanguage(int|string|Language|null $language): void
+    {
+        $language = $this->languageRepository->getLanguage($language);
+        if ($language === null) {
+            return;
+        }
+
+        session(['locale' => $language->code]);
+        app()->setLocale($language->code);
+    }
+
+    public function getLanguage(): ?Language
+    {
+        $locale = session('locale');
+        if ($locale === null) {
+            return null;
+        }
+        $language = $this->languageRepository->getByCode($locale);
+        if (!$language) {
+            return $this->languageRepository->getDefaultLanguage();
+        }
+        return $language;
+    }
 }

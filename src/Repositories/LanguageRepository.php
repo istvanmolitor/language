@@ -26,6 +26,22 @@ class LanguageRepository implements LanguageRepositoryInterface
         $this->codeCache[$language->code] = $language;
     }
 
+    public function getLanguage(int|string|Language|null $language): ?Language
+    {
+        if (is_numeric($language)) {
+            return $this->getById($language);
+        }
+        elseif (is_string($language)) {
+            return $this->getByCode($language);
+        }
+        elseif ($language instanceof Language) {
+            return $language;
+        }
+        else {
+            return $this->getDefaultLanguage();
+        }
+    }
+
     public function getIdByCode(string $code): ?int
     {
         return $this->getByCode($code)?->id;
