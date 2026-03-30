@@ -30,14 +30,11 @@ class LanguageRepository implements LanguageRepositoryInterface
     {
         if (is_numeric($language)) {
             return $this->getById($language);
-        }
-        elseif (is_string($language)) {
+        } elseif (is_string($language)) {
             return $this->getByCode($language);
-        }
-        elseif ($language instanceof Language) {
+        } elseif ($language instanceof Language) {
             return $language;
-        }
-        else {
+        } else {
             return $this->getDefaultLanguage();
         }
     }

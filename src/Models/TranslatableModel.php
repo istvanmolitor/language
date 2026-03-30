@@ -352,9 +352,9 @@ abstract class TranslatableModel extends Model
         } elseif (is_string($value)) {
             return $this->getIdByCode($value);
         } elseif ($value instanceof Language) {
-            return (int)$value->id;
+            return (int) $value->id;
         } else {
-            return (int)$value;
+            return (int) $value;
         }
     }
 

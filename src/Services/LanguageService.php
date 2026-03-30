@@ -19,7 +19,7 @@ class LanguageService
     public function getCurrentLanguage(): ?Language
     {
         $language = $this->languageRepository->getByCode(app()->getLocale());
-        if($language) {
+        if ($language) {
             return $language;
         }
 
@@ -103,9 +103,10 @@ class LanguageService
             return null;
         }
         $language = $this->languageRepository->getByCode($locale);
-        if (!$language) {
+        if (! $language) {
             return $this->languageRepository->getDefaultLanguage();
         }
+
         return $language;
     }
 }

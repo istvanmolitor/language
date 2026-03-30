@@ -16,7 +16,7 @@ class SetLocaleFromSession
         /** @var LanguageService $languageService */
         $languageService = app()->make(LanguageService::class);
         $language = $languageService->getLanguage();
-        if($language) {
+        if ($language) {
             app()->setLocale($language->code);
         }
 
