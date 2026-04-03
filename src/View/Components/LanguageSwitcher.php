@@ -15,7 +15,7 @@ class LanguageSwitcher extends Component
 {
     public Collection $enabledLanguages;
 
-    public Language $currentLanguage;
+    public ?Language $currentLanguage;
 
     /**
      * Create a new component instance.
@@ -33,7 +33,7 @@ class LanguageSwitcher extends Component
      */
     public function shouldRender(): bool
     {
-        return $this->enabledLanguages->count() > 1;
+        return $this->currentLanguage !== null && $this->enabledLanguages->count() > 1;
     }
 
     /**
