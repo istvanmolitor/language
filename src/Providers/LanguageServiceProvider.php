@@ -2,6 +2,7 @@
 
 namespace Molitor\Language\Providers;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Molitor\Language\Http\Middleware\SetLocaleFromSession;
@@ -23,7 +24,7 @@ class LanguageServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
         // Load API routes with /api prefix
-        $this->app->make(\Illuminate\Routing\Router::class)
+        $this->app->make(Router::class)
             ->prefix('api')
             ->group(__DIR__.'/../routes/api.php');
 
