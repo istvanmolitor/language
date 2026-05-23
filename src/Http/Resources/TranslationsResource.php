@@ -30,10 +30,13 @@ class TranslationsResource extends JsonResource
 
         if ($allTranslations) {
             foreach ($allTranslations as $langId => $translation) {
-                $translations[$langId] = array_intersect_key(
+                $languageId = (int) ($translation->language_id ?? $langId);
+                $translations[(string) $languageId] = array_merge([
+                    'language_id' => $languageId,
+                ], array_intersect_key(
                     $translation->toArray(),
                     array_flip($translation->getTranslatableFields())
-                );
+                ));
             }
         }
 
