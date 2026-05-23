@@ -94,7 +94,11 @@ class LanguageRepository implements LanguageRepositoryInterface
 
     public function getAll(): Collection
     {
-        return $this->language->joinTranslation()->orderByTranslation('name')->get();
+        return $this->language
+            ->joinTranslation()
+            ->selectBase()
+            ->orderByTranslation('name')
+            ->get();
     }
 
     public function getEnabledLanguages(): Collection
