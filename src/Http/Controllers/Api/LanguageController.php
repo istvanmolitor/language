@@ -68,6 +68,88 @@ class LanguageController extends BaseAdminController
         return response()->json(new DataTableResource($languages, LanguageResource::class, $request->only(['search', 'sort', 'direction'])));
     }
 
+    #[OA\Get(
+        path: '/api/admin/languages/select',
+        summary: 'Search languages for select inputs',
+        tags: ['Languages'],
+        parameters: [
+            new OA\Parameter(name: 'search', in: 'query', required: false, schema: new OA\Schema(type: 'string')),
+            new OA\Parameter(name: 'per_page', in: 'query', required: false, schema: new OA\Schema(type: 'integer', default: 20)),
+            new OA\Parameter(name: 'include_disabled', in: 'query', required: false, schema: new OA\Schema(type: 'boolean', default: false)),
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Success',
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(
+                            property: 'data',
+                            type: 'array',
+                            items: new OA\Items(ref: '#/components/schemas/Language')
+                        ),
+                        new OA\Property(
+                            property: 'meta',
+                            type: 'object',
+                            properties: [
+                                new OA\Property(property: 'current_page', type: 'integer'),
+                                new OA\Property(property: 'last_page', type: 'integer'),
+                                new OA\Property(property: 'per_page', type: 'integer'),
+                                new OA\Property(property: 'total', type: 'integer'),
+                            ]
+                        ),
+                    ]
+                )
+            ),
+        ]
+    )]
+    public function select(Request $request): JsonResponse
+    {
+        $search = trim((string) $request->input('search', ''));
+        $perPage = max(1, min(500, (int) $request->input('per_page', 20)));
+        $includeDisabled = $request->boolean('include_disabled', false);
+
+        $query = Language::query();
+
+        if (! $includeDisabled) {
+            $query->where('enabled', true);
+        }
+
+        if ($search !== '') {
+            $query->where(function ($query) use ($search): void {
+                $query->where('code', 'like', '%'.$search.'%');
+            });
+        }
+
+        $languages = $query
+            ->orderBy('code')
+            ->paginate($perPage)
+            ->withQueryString();
+
+        // Load translations for each item
+        $items = collect($languages->items())->map(function ($language) {
+            $language->loadTranslations();
+
+            return $language;
+        });
+
+        $languages->setCollection($items);
+
+        return response()->json([
+            'data' => LanguageResource::collection($languages->items()),
+            'meta' => [
+                'current_page' => $languages->currentPage(),
+                'last_page' => $languages->lastPage(),
+                'per_page' => $languages->perPage(),
+                'total' => $languages->total(),
+            ],
+            'filters' => [
+                'search' => $search,
+                'include_disabled' => $includeDisabled,
+            ],
+        ]);
+    }
+
     public function create(LanguageRepositoryInterface $languageRepository): JsonResponse
     {
         $availableLanguages = $languageRepository->getAll();
