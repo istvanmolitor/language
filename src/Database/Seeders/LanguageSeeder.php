@@ -28,915 +28,1459 @@ class LanguageSeeder extends Seeder
         $languages = [
             [
                 'code' => 'ab',
-                'name' => 'Abkhaz',
-                'native_name' => 'аҧсуа',
+                'name' => [
+                    'en' => 'Abkhaz',
+                    'ab' => 'аҧсуа',
+                    'hu' => 'Abház',
+                ],
             ],
             [
                 'code' => 'aa',
-                'name' => 'Afar',
-                'native_name' => 'Afaraf',
+                'name' => [
+                    'en' => 'Afar',
+                    'aa' => 'Afaraf',
+                    'hu' => 'Afár',
+                ],
             ],
             [
                 'code' => 'af',
-                'name' => 'Afrikaans',
-                'native_name' => 'Afrikaans',
+                'name' => [
+                    'en' => 'Afrikaans',
+                    'af' => 'Afrikaans',
+                    'hu' => 'Afrikaans',
+                ],
             ],
             [
                 'code' => 'ak',
-                'name' => 'Akan',
-                'native_name' => 'Akan',
+                'name' => [
+                    'en' => 'Akan',
+                    'ak' => 'Akan',
+                    'hu' => 'Akan',
+                ],
             ],
             [
                 'code' => 'sq',
-                'name' => 'Albanian',
-                'native_name' => 'Shqip',
+                'name' => [
+                    'en' => 'Albanian',
+                    'sq' => 'Shqip',
+                    'hu' => 'Albán',
+                ],
             ],
             [
                 'code' => 'am',
-                'name' => 'Amharic',
-                'native_name' => 'አማርኛ',
+                'name' => [
+                    'en' => 'Amharic',
+                    'am' => 'አማርኛ',
+                    'hu' => 'Amhár',
+                ],
             ],
             [
                 'code' => 'ar',
-                'name' => 'Arabic',
-                'native_name' => 'العربية',
+                'name' => [
+                    'en' => 'Arabic',
+                    'ar' => 'العربية',
+                    'hu' => 'Arab',
+                ],
             ],
             [
                 'code' => 'an',
-                'name' => 'Aragonese',
-                'native_name' => 'Aragonés',
+                'name' => [
+                    'en' => 'Aragonese',
+                    'an' => 'Aragonés',
+                    'hu' => 'Aragonai',
+                ],
             ],
             [
                 'code' => 'hy',
-                'name' => 'Armenian',
-                'native_name' => 'Հայերեն',
+                'name' => [
+                    'en' => 'Armenian',
+                    'hy' => 'Հայերեն',
+                    'hu' => 'Örmény',
+                ],
             ],
             [
                 'code' => 'as',
-                'name' => 'Assamese',
-                'native_name' => 'অসমীয়া',
+                'name' => [
+                    'en' => 'Assamese',
+                    'as' => 'অসমীয়া',
+                    'hu' => 'Asszámi',
+                ],
             ],
             [
                 'code' => 'av',
-                'name' => 'Avaric',
-                'native_name' => 'авар мацӀ, магӀарул мацӀ',
+                'name' => [
+                    'en' => 'Avaric',
+                    'av' => 'авар мацӀ, магӀарул мацӀ',
+                    'hu' => 'Avár',
+                ],
             ],
             [
                 'code' => 'ae',
-                'name' => 'Avestan',
-                'native_name' => 'avesta',
+                'name' => [
+                    'en' => 'Avestan',
+                    'ae' => 'avesta',
+                    'hu' => 'Aveszt',
+                ],
             ],
             [
                 'code' => 'ay',
-                'name' => 'Aymara',
-                'native_name' => 'aymar aru',
+                'name' => [
+                    'en' => 'Aymara',
+                    'ay' => 'aymar aru',
+                    'hu' => 'Aymara',
+                ],
             ],
             [
                 'code' => 'az',
-                'name' => 'Azerbaijani',
-                'native_name' => 'azərbaycan dili',
+                'name' => [
+                    'en' => 'Azerbaijani',
+                    'az' => 'azərbaycan dili',
+                    'hu' => 'Azerbajdzsáni',
+                ],
             ],
             [
                 'code' => 'bm',
-                'name' => 'Bambara',
-                'native_name' => 'bamanankan',
+                'name' => [
+                    'en' => 'Bambara',
+                    'bm' => 'bamanankan',
+                    'hu' => 'Bambara',
+                ],
             ],
             [
                 'code' => 'ba',
-                'name' => 'Bashkir',
-                'native_name' => 'башҡорт теле',
+                'name' => [
+                    'en' => 'Bashkir',
+                    'ba' => 'башҡорт теле',
+                    'hu' => 'Baškír',
+                ],
             ],
             [
                 'code' => 'eu',
-                'name' => 'Basque',
-                'native_name' => 'euskara, euskera',
+                'name' => [
+                    'en' => 'Basque',
+                    'eu' => 'euskara, euskera',
+                    'hu' => 'Baszk',
+                ],
             ],
             [
                 'code' => 'be',
-                'name' => 'Belarusian',
-                'native_name' => 'Беларуская',
+                'name' => [
+                    'en' => 'Belarusian',
+                    'be' => 'Беларуская',
+                    'hu' => 'Belarusz',
+                ],
             ],
             [
                 'code' => 'bn',
-                'name' => 'Bengali',
-                'native_name' => 'বাংলা',
+                'name' => [
+                    'en' => 'Bengali',
+                    'bn' => 'বাংলা',
+                    'hu' => 'Bengáli',
+                ],
             ],
             [
                 'code' => 'bh',
-                'name' => 'Bihari',
-                'native_name' => 'भोजपुरी',
+                'name' => [
+                    'en' => 'Bihari',
+                    'bh' => 'भोजपुरी',
+                    'hu' => 'Bihari',
+                ],
             ],
             [
                 'code' => 'bi',
-                'name' => 'Bislama',
-                'native_name' => 'Bislama',
+                'name' => [
+                    'en' => 'Bislama',
+                    'bi' => 'Bislama',
+                    'hu' => 'Bislama',
+                ],
             ],
             [
                 'code' => 'bs',
-                'name' => 'Bosnian',
-                'native_name' => 'bosanski jezik',
+                'name' => [
+                    'en' => 'Bosnian',
+                    'bs' => 'bosanski jezik',
+                    'hu' => 'Bosnyák',
+                ],
             ],
             [
                 'code' => 'br',
-                'name' => 'Breton',
-                'native_name' => 'brezhoneg',
+                'name' => [
+                    'en' => 'Breton',
+                    'br' => 'brezhoneg',
+                    'hu' => 'Breton',
+                ],
             ],
             [
                 'code' => 'bg',
-                'name' => 'Bulgarian',
-                'native_name' => 'български език',
+                'name' => [
+                    'en' => 'Bulgarian',
+                    'bg' => 'български език',
+                    'hu' => 'Bolgár',
+                ],
             ],
             [
                 'code' => 'my',
-                'name' => 'Burmese',
-                'native_name' => 'ဗမာစာ',
+                'name' => [
+                    'en' => 'Burmese',
+                    'my' => 'ဗမာစာ',
+                    'hu' => 'Birmai',
+                ],
             ],
             [
                 'code' => 'ca',
-                'name' => 'Catalan; Valencian',
-                'native_name' => 'Català',
+                'name' => [
+                    'en' => 'Catalan; Valencian',
+                    'ca' => 'Català',
+                    'hu' => 'Katalán',
+                ],
             ],
             [
                 'code' => 'ch',
-                'name' => 'Chamorro',
-                'native_name' => 'Chamoru',
+                'name' => [
+                    'en' => 'Chamorro',
+                    'ch' => 'Chamoru',
+                    'hu' => 'Chamorro',
+                ],
             ],
             [
                 'code' => 'ce',
-                'name' => 'Chechen',
-                'native_name' => 'нохчийн мотт',
+                'name' => [
+                    'en' => 'Chechen',
+                    'ce' => 'нохчийн мотт',
+                    'hu' => 'Csecsen',
+                ],
             ],
             [
                 'code' => 'ny',
-                'name' => 'Chichewa; Chewa; Nyanja',
-                'native_name' => 'chiCheŵa, chinyanja',
+                'name' => [
+                    'en' => 'Chichewa; Chewa; Nyanja',
+                    'ny' => 'chiCheŵa, chinyanja',
+                    'hu' => 'Csicseva',
+                ],
             ],
             [
                 'code' => 'zh',
-                'name' => 'Chinese',
-                'native_name' => '中文 (Zhōngwén), 汉语, 漢語',
+                'name' => [
+                    'en' => 'Chinese',
+                    'zh' => '中文 (Zhōngwén), 汉语, 漢語',
+                    'hu' => 'Kínai',
+                ],
             ],
             [
                 'code' => 'cv',
-                'name' => 'Chuvash',
-                'native_name' => 'чӑваш чӗлхи',
+                'name' => [
+                    'en' => 'Chuvash',
+                    'cv' => 'чӑваш чӗлхи',
+                    'hu' => 'Csuvás',
+                ],
             ],
             [
                 'code' => 'kw',
-                'name' => 'Cornish',
-                'native_name' => 'Kernewek',
+                'name' => [
+                    'en' => 'Cornish',
+                    'kw' => 'Kernewek',
+                    'hu' => 'Kornvall',
+                ],
             ],
             [
                 'code' => 'co',
-                'name' => 'Corsican',
-                'native_name' => 'corsu, lingua corsa',
+                'name' => [
+                    'en' => 'Corsican',
+                    'co' => 'corsu, lingua corsa',
+                    'hu' => 'Korzikai',
+                ],
             ],
             [
                 'code' => 'cr',
-                'name' => 'Cree',
-                'native_name' => 'ᓀᐦᐃᔭᐍᐏᐣ',
+                'name' => [
+                    'en' => 'Cree',
+                    'cr' => 'ᓀᐦᐃᔭᐍᐏᐣ',
+                    'hu' => 'Kríj',
+                ],
             ],
             [
                 'code' => 'hr',
-                'name' => 'Croatian',
-                'native_name' => 'hrvatski',
+                'name' => [
+                    'en' => 'Croatian',
+                    'hr' => 'hrvatski',
+                    'hu' => 'Horvát',
+                ],
             ],
             [
                 'code' => 'cs',
-                'name' => 'Czech',
-                'native_name' => 'česky, čeština',
+                'name' => [
+                    'en' => 'Czech',
+                    'cs' => 'česky, čeština',
+                    'hu' => 'Cseh',
+                ],
             ],
             [
                 'code' => 'da',
-                'name' => 'Danish',
-                'native_name' => 'dansk',
+                'name' => [
+                    'en' => 'Danish',
+                    'da' => 'dansk',
+                    'hu' => 'Dán',
+                ],
             ],
             [
                 'code' => 'dv',
-                'name' => 'Divehi; Dhivehi; Maldivian;',
-                'native_name' => 'ދިވެހި',
+                'name' => [
+                    'en' => 'Divehi; Dhivehi; Maldivian;',
+                    'dv' => 'ދިވެހި',
+                    'hu' => 'Divahi',
+                ],
             ],
             [
                 'code' => 'nl',
-                'name' => 'Dutch',
-                'native_name' => 'Nederlands, Vlaams',
+                'name' => [
+                    'en' => 'Dutch',
+                    'nl' => 'Nederlands, Vlaams',
+                    'hu' => 'Holland',
+                ],
             ],
             [
                 'enabled' => true,
                 'code' => 'en',
-                'name' => 'English',
-                'native_name' => 'English',
+                'name' => [
+                    'en' => 'English',
+                    'hu' => 'Angol',
+                ],
             ],
             [
                 'code' => 'eo',
-                'name' => 'Esperanto',
-                'native_name' => 'Esperanto',
+                'name' => [
+                    'en' => 'Esperanto',
+                    'eo' => 'Esperanto',
+                    'hu' => 'Eszperantó',
+                ],
             ],
             [
                 'code' => 'et',
-                'name' => 'Estonian',
-                'native_name' => 'eesti, eesti keel',
+                'name' => [
+                    'en' => 'Estonian',
+                    'et' => 'eesti, eesti keel',
+                    'hu' => 'Észt',
+                ],
             ],
             [
                 'code' => 'ee',
-                'name' => 'Ewe',
-                'native_name' => 'Eʋegbe',
+                'name' => [
+                    'en' => 'Ewe',
+                    'ee' => 'Eʋegbe',
+                    'hu' => 'Eve',
+                ],
             ],
             [
                 'code' => 'fo',
-                'name' => 'Faroese',
-                'native_name' => 'føroyskt',
+                'name' => [
+                    'en' => 'Faroese',
+                    'fo' => 'føroyskt',
+                    'hu' => 'Faroe-szigeti',
+                ],
             ],
             [
                 'code' => 'fj',
-                'name' => 'Fijian',
-                'native_name' => 'vosa Vakaviti',
+                'name' => [
+                    'en' => 'Fijian',
+                    'fj' => 'vosa Vakaviti',
+                    'hu' => 'Fidzsi',
+                ],
             ],
             [
                 'code' => 'fi',
-                'name' => 'Finnish',
-                'native_name' => 'suomi, suomen kieli',
+                'name' => [
+                    'en' => 'Finnish',
+                    'fi' => 'suomi, suomen kieli',
+                    'hu' => 'Finn',
+                ],
             ],
             [
                 'code' => 'fr',
-                'name' => 'French',
-                'native_name' => 'français, langue française',
+                'name' => [
+                    'en' => 'French',
+                    'fr' => 'français, langue française',
+                    'hu' => 'Francia',
+                ],
             ],
             [
                 'code' => 'ff',
-                'name' => 'Fula; Fulah; Pulaar; Pular',
-                'native_name' => 'Fulfulde, Pulaar, Pular',
+                'name' => [
+                    'en' => 'Fula; Fulah; Pulaar; Pular',
+                    'ff' => 'Fulfulde, Pulaar, Pular',
+                    'hu' => 'Fullani',
+                ],
             ],
             [
                 'code' => 'gl',
-                'name' => 'Galician',
-                'native_name' => 'Galego',
+                'name' => [
+                    'en' => 'Galician',
+                    'gl' => 'Galego',
+                    'hu' => 'Galíciai',
+                ],
             ],
             [
                 'code' => 'ka',
-                'name' => 'Georgian',
-                'native_name' => 'ქართული',
+                'name' => [
+                    'en' => 'Georgian',
+                    'ka' => 'ქართული',
+                    'hu' => 'Grúz',
+                ],
             ],
             [
                 'code' => 'de',
-                'name' => 'German',
-                'native_name' => 'Deutsch',
+                'name' => [
+                    'en' => 'German',
+                    'de' => 'Deutsch',
+                    'hu' => 'Német',
+                ],
             ],
             [
                 'code' => 'el',
-                'name' => 'Greek, Modern',
-                'native_name' => 'Ελληνικά',
+                'name' => [
+                    'en' => 'Greek, Modern',
+                    'el' => 'Ελληνικά',
+                    'hu' => 'Görög',
+                ],
             ],
             [
                 'code' => 'gn',
-                'name' => 'Guaraní',
-                'native_name' => 'Avañeẽ',
+                'name' => [
+                    'en' => 'Guaraní',
+                    'gn' => 'Avañeẽ',
+                    'hu' => 'Guarani',
+                ],
             ],
             [
                 'code' => 'gu',
-                'name' => 'Gujarati',
-                'native_name' => 'ગુજરાતી',
+                'name' => [
+                    'en' => 'Gujarati',
+                    'gu' => 'ગુજરાતી',
+                    'hu' => 'Gujarati',
+                ],
             ],
             [
                 'code' => 'ht',
-                'name' => 'Haitian; Haitian Creole',
-                'native_name' => 'Kreyòl ayisyen',
+                'name' => [
+                    'en' => 'Haitian; Haitian Creole',
+                    'ht' => 'Kreyòl ayisyen',
+                    'hu' => 'Haiti-kreol',
+                ],
             ],
             [
                 'code' => 'ha',
-                'name' => 'Hausa',
-                'native_name' => 'Hausa, هَوُسَ',
+                'name' => [
+                    'en' => 'Hausa',
+                    'ha' => 'Hausa, هَوُسَ',
+                    'hu' => 'Hausza',
+                ],
             ],
             [
                 'code' => 'he',
-                'name' => 'Hebrew (modern)',
-                'native_name' => 'עברית',
+                'name' => [
+                    'en' => 'Hebrew (modern)',
+                    'he' => 'עברית',
+                    'hu' => 'Héber',
+                ],
             ],
             [
                 'code' => 'hz',
-                'name' => 'Herero',
-                'native_name' => 'Otjiherero',
+                'name' => [
+                    'en' => 'Herero',
+                    'hz' => 'Otjiherero',
+                    'hu' => 'Herero',
+                ],
             ],
             [
                 'code' => 'hi',
-                'name' => 'Hindi',
-                'native_name' => 'हिन्दी, हिंदी',
+                'name' => [
+                    'en' => 'Hindi',
+                    'hi' => 'हिन्दी, हिंदी',
+                    'hu' => 'Hindi',
+                ],
             ],
             [
                 'code' => 'ho',
-                'name' => 'Hiri Motu',
-                'native_name' => 'Hiri Motu',
+                'name' => [
+                    'en' => 'Hiri Motu',
+                    'ho' => 'Hiri Motu',
+                    'hu' => 'Hiri Motu',
+                ],
             ],
             [
                 'enabled' => true,
                 'code' => 'hu',
-                'name' => 'Hungarian',
-                'native_name' => 'Magyar',
+                'name' => [
+                    'hu' => 'Magyar',
+                    'en' => 'Hungarian',
+                ],
             ],
             [
                 'code' => 'ia',
-                'name' => 'Interlingua',
-                'native_name' => 'Interlingua',
+                'name' => [
+                    'en' => 'Interlingua',
+                    'ia' => 'Interlingua',
+                    'hu' => 'Interlingua',
+                ],
             ],
             [
                 'code' => 'id',
-                'name' => 'Indonesian',
-                'native_name' => 'Bahasa Indonesia',
+                'name' => [
+                    'en' => 'Indonesian',
+                    'id' => 'Bahasa Indonesia',
+                    'hu' => 'Indonéz',
+                ],
             ],
             [
                 'code' => 'ie',
-                'name' => 'Interlingue',
-                'native_name' => 'Originally called Occidental; then Interlingue after WWII',
+                'name' => [
+                    'en' => 'Interlingue',
+                    'ie' => 'Originally called Occidental; then Interlingue after WWII',
+                    'hu' => 'Interlingue',
+                ],
             ],
             [
                 'code' => 'ga',
-                'name' => 'Irish',
-                'native_name' => 'Gaeilge',
+                'name' => [
+                    'en' => 'Irish',
+                    'ga' => 'Gaeilge',
+                    'hu' => 'Ír',
+                ],
             ],
             [
                 'code' => 'ig',
-                'name' => 'Igbo',
-                'native_name' => 'Asụsụ Igbo',
+                'name' => [
+                    'en' => 'Igbo',
+                    'ig' => 'Asụsụ Igbo',
+                    'hu' => 'Igbo',
+                ],
             ],
             [
                 'code' => 'ik',
-                'name' => 'Inupiaq',
-                'native_name' => 'Iñupiaq, Iñupiatun',
+                'name' => [
+                    'en' => 'Inupiaq',
+                    'ik' => 'Iñupiaq, Iñupiatun',
+                    'hu' => 'Inupiaq',
+                ],
             ],
             [
                 'code' => 'io',
-                'name' => 'Ido',
-                'native_name' => 'Ido',
+                'name' => [
+                    'en' => 'Ido',
+                    'io' => 'Ido',
+                    'hu' => 'Ido',
+                ],
             ],
             [
                 'code' => 'is',
-                'name' => 'Icelandic',
-                'native_name' => 'Íslenska',
+                'name' => [
+                    'en' => 'Icelandic',
+                    'is' => 'Íslenska',
+                    'hu' => 'Izlandi',
+                ],
             ],
             [
                 'code' => 'it',
-                'name' => 'Italian',
-                'native_name' => 'Italiano',
+                'name' => [
+                    'en' => 'Italian',
+                    'it' => 'Italiano',
+                    'hu' => 'Olasz',
+                ],
             ],
             [
                 'code' => 'iu',
-                'name' => 'Inuktitut',
-                'native_name' => 'ᐃᓄᒃᑎᑐᑦ',
+                'name' => [
+                    'en' => 'Inuktitut',
+                    'iu' => 'ᐃᓄᒃᑎᑐᑦ',
+                    'hu' => 'Inuktitut',
+                ],
             ],
             [
                 'code' => 'ja',
-                'name' => 'Japanese',
-                'native_name' => '日本語 (にほんご／にっぽんご)',
+                'name' => [
+                    'en' => 'Japanese',
+                    'ja' => '日本語 (にほんご／にっぽんご)',
+                    'hu' => 'Japán',
+                ],
             ],
             [
                 'code' => 'jv',
-                'name' => 'Javanese',
-                'native_name' => 'basa Jawa',
+                'name' => [
+                    'en' => 'Javanese',
+                    'jv' => 'basa Jawa',
+                    'hu' => 'Jávai',
+                ],
             ],
             [
                 'code' => 'kl',
-                'name' => 'Kalaallisut, Greenlandic',
-                'native_name' => 'kalaallisut, kalaallit oqaasii',
+                'name' => [
+                    'en' => 'Kalaallisut, Greenlandic',
+                    'kl' => 'kalaallisut, kalaallit oqaasii',
+                    'hu' => 'Grönlandi',
+                ],
             ],
             [
                 'code' => 'kn',
-                'name' => 'Kannada',
-                'native_name' => 'ಕನ್ನಡ',
+                'name' => [
+                    'en' => 'Kannada',
+                    'kn' => 'ಕನ್ನಡ',
+                    'hu' => 'Kannada',
+                ],
             ],
             [
                 'code' => 'kr',
-                'name' => 'Kanuri',
-                'native_name' => 'Kanuri',
+                'name' => [
+                    'en' => 'Kanuri',
+                    'kr' => 'Kanuri',
+                    'hu' => 'Kanuri',
+                ],
             ],
             [
                 'code' => 'ks',
-                'name' => 'Kashmiri',
-                'native_name' => 'कश्मीरी, كشميري‎',
+                'name' => [
+                    'en' => 'Kashmiri',
+                    'ks' => 'कश्मीरी, كشميري‎',
+                    'hu' => 'Kesmiri',
+                ],
             ],
             [
                 'code' => 'kk',
-                'name' => 'Kazakh',
-                'native_name' => 'Қазақ тілі',
+                'name' => [
+                    'en' => 'Kazakh',
+                    'kk' => 'Қазақ тілі',
+                    'hu' => 'Kazah',
+                ],
             ],
             [
                 'code' => 'km',
-                'name' => 'Khmer',
-                'native_name' => 'ភាសាខ្មែរ',
+                'name' => [
+                    'en' => 'Khmer',
+                    'km' => 'ភាសាខ្មែរ',
+                    'hu' => 'Khmer',
+                ],
             ],
             [
                 'code' => 'ki',
-                'name' => 'Kikuyu, Gikuyu',
-                'native_name' => 'Gĩkũyũ',
+                'name' => [
+                    'en' => 'Kikuyu, Gikuyu',
+                    'ki' => 'Gĩkũyũ',
+                    'hu' => 'Kikuyu',
+                ],
             ],
             [
                 'code' => 'rw',
-                'name' => 'Kinyarwanda',
-                'native_name' => 'Ikinyarwanda',
+                'name' => [
+                    'en' => 'Kinyarwanda',
+                    'rw' => 'Ikinyarwanda',
+                    'hu' => 'Ruandai',
+                ],
             ],
             [
                 'code' => 'ky',
-                'name' => 'Kirghiz, Kyrgyz',
-                'native_name' => 'кыргыз тили',
+                'name' => [
+                    'en' => 'Kirghiz, Kyrgyz',
+                    'ky' => 'кыргыз тили',
+                    'hu' => 'Kirgiz',
+                ],
             ],
             [
                 'code' => 'kv',
-                'name' => 'Komi',
-                'native_name' => 'коми кыв',
+                'name' => [
+                    'en' => 'Komi',
+                    'kv' => 'коми кыв',
+                    'hu' => 'Komi',
+                ],
             ],
             [
                 'code' => 'kg',
-                'name' => 'Kongo',
-                'native_name' => 'KiKongo',
+                'name' => [
+                    'en' => 'Kongo',
+                    'kg' => 'KiKongo',
+                    'hu' => 'Konga',
+                ],
             ],
             [
                 'code' => 'ko',
-                'name' => 'Korean',
-                'native_name' => '한국어 (韓國語), 조선말 (朝鮮語)',
+                'name' => [
+                    'en' => 'Korean',
+                    'ko' => '한국어 (韓國語), 조선말 (朝鮮語)',
+                    'hu' => 'Koreai',
+                ],
             ],
             [
                 'code' => 'ku',
-                'name' => 'Kurdish',
-                'native_name' => 'Kurdî, كوردی‎',
+                'name' => [
+                    'en' => 'Kurdish',
+                    'ku' => 'Kurdî, كوردی‎',
+                    'hu' => 'Kurd',
+                ],
             ],
             [
                 'code' => 'kj',
-                'name' => 'Kwanyama, Kuanyama',
-                'native_name' => 'Kuanyama',
+                'name' => [
+                    'en' => 'Kwanyama, Kuanyama',
+                    'kj' => 'Kuanyama',
+                    'hu' => 'Kwanyama',
+                ],
             ],
             [
                 'code' => 'la',
-                'name' => 'Latin',
-                'native_name' => 'latine, lingua latina',
+                'name' => [
+                    'en' => 'Latin',
+                    'la' => 'latine, lingua latina',
+                    'hu' => 'Latin',
+                ],
             ],
             [
                 'code' => 'lb',
-                'name' => 'Luxembourgish, Letzeburgesch',
-                'native_name' => 'Lëtzebuergesch',
+                'name' => [
+                    'en' => 'Luxembourgish, Letzeburgesch',
+                    'lb' => 'Lëtzebuergesch',
+                    'hu' => 'Luxemburgi',
+                ],
             ],
             [
                 'code' => 'lg',
-                'name' => 'Luganda',
-                'native_name' => 'Luganda',
+                'name' => [
+                    'en' => 'Luganda',
+                    'lg' => 'Luganda',
+                    'hu' => 'Luganda',
+                ],
             ],
             [
                 'code' => 'li',
-                'name' => 'Limburgish, Limburgan, Limburger',
-                'native_name' => 'Limburgs',
+                'name' => [
+                    'en' => 'Limburgish, Limburgan, Limburger',
+                    'li' => 'Limburgs',
+                    'hu' => 'Limburgi',
+                ],
             ],
             [
                 'code' => 'ln',
-                'name' => 'Lingala',
-                'native_name' => 'Lingála',
+                'name' => [
+                    'en' => 'Lingala',
+                    'ln' => 'Lingála',
+                    'hu' => 'Lingala',
+                ],
             ],
             [
                 'code' => 'lo',
-                'name' => 'Lao',
-                'native_name' => 'ພາສາລາວ',
+                'name' => [
+                    'en' => 'Lao',
+                    'lo' => 'ພາສາລາວ',
+                    'hu' => 'Lao',
+                ],
             ],
             [
                 'code' => 'lt',
-                'name' => 'Lithuanian',
-                'native_name' => 'lietuvių kalba',
+                'name' => [
+                    'en' => 'Lithuanian',
+                    'lt' => 'lietuvių kalba',
+                    'hu' => 'Litván',
+                ],
             ],
             [
                 'code' => 'lu',
-                'name' => 'Luba-Katanga',
-                'native_name' => '',
+                'name' => [
+                    'en' => 'Luba-Katanga',
+                    'lu' => 'Luba-Katanga',
+                    'hu' => 'Luba-Katanga',
+                ],
             ],
             [
                 'code' => 'lv',
-                'name' => 'Latvian',
-                'native_name' => 'latviešu valoda',
+                'name' => [
+                    'en' => 'Latvian',
+                    'lv' => 'latviešu valoda',
+                    'hu' => 'Lett',
+                ],
             ],
             [
                 'code' => 'gv',
-                'name' => 'Manx',
-                'native_name' => 'Gaelg, Gailck',
+                'name' => [
+                    'en' => 'Manx',
+                    'gv' => 'Gaelg, Gailck',
+                    'hu' => 'Manx',
+                ],
             ],
             [
                 'code' => 'mk',
-                'name' => 'Macedonian',
-                'native_name' => 'македонски јазик',
+                'name' => [
+                    'en' => 'Macedonian',
+                    'mk' => 'македонски јазик',
+                    'hu' => 'Macedón',
+                ],
             ],
             [
                 'code' => 'mg',
-                'name' => 'Malagasy',
-                'native_name' => 'Malagasy fiteny',
+                'name' => [
+                    'en' => 'Malagasy',
+                    'mg' => 'Malagasy fiteny',
+                    'hu' => 'Malagaszi',
+                ],
             ],
             [
                 'code' => 'ms',
-                'name' => 'Malay',
-                'native_name' => 'bahasa Melayu, بهاس ملايو‎',
+                'name' => [
+                    'en' => 'Malay',
+                    'ms' => 'bahasa Melayu, بهاس ملايو‎',
+                    'hu' => 'Maláj',
+                ],
             ],
             [
                 'code' => 'ml',
-                'name' => 'Malayalam',
-                'native_name' => 'മലയാളം',
+                'name' => [
+                    'en' => 'Malayalam',
+                    'ml' => 'മലയാളം',
+                    'hu' => 'Malayalam',
+                ],
             ],
             [
                 'code' => 'mt',
-                'name' => 'Maltese',
-                'native_name' => 'Malti',
+                'name' => [
+                    'en' => 'Maltese',
+                    'mt' => 'Malti',
+                    'hu' => 'Máltai',
+                ],
             ],
             [
                 'code' => 'mi',
-                'name' => 'Māori',
-                'native_name' => 'te reo Māori',
+                'name' => [
+                    'en' => 'Māori',
+                    'mi' => 'te reo Māori',
+                    'hu' => 'Maori',
+                ],
             ],
             [
                 'code' => 'mr',
-                'name' => 'Marathi (Marāṭhī)',
-                'native_name' => 'मराठी',
+                'name' => [
+                    'en' => 'Marathi (Marāṭhī)',
+                    'mr' => 'मराठी',
+                    'hu' => 'Marathi',
+                ],
             ],
             [
                 'code' => 'mh',
-                'name' => 'Marshallese',
-                'native_name' => 'Kajin M̧ajeļ',
+                'name' => [
+                    'en' => 'Marshallese',
+                    'mh' => 'Kajin M̧ajeļ',
+                    'hu' => 'Marshall-szigeti',
+                ],
             ],
             [
                 'code' => 'mn',
-                'name' => 'Mongolian',
-                'native_name' => 'монгол',
+                'name' => [
+                    'en' => 'Mongolian',
+                    'mn' => 'монгол',
+                    'hu' => 'Mongol',
+                ],
             ],
             [
                 'code' => 'na',
-                'name' => 'Nauru',
-                'native_name' => 'Ekakairũ Naoero',
+                'name' => [
+                    'en' => 'Nauru',
+                    'na' => 'Ekakairũ Naoero',
+                    'hu' => 'Naurui',
+                ],
             ],
             [
                 'code' => 'nv',
-                'name' => 'Navajo, Navaho',
-                'native_name' => 'Diné bizaad, Dinékʼehǰí',
+                'name' => [
+                    'en' => 'Navajo, Navaho',
+                    'nv' => 'Diné bizaad, Dinékʼehǰí',
+                    'hu' => 'Navaho',
+                ],
             ],
             [
                 'code' => 'nb',
-                'name' => 'Norwegian Bokmål',
-                'native_name' => 'Norsk bokmål',
+                'name' => [
+                    'en' => 'Norwegian Bokmål',
+                    'nb' => 'Norsk bokmål',
+                    'hu' => 'Norvég Bokmål',
+                ],
             ],
             [
                 'code' => 'nd',
-                'name' => 'North Ndebele',
-                'native_name' => 'isiNdebele',
+                'name' => [
+                    'en' => 'North Ndebele',
+                    'nd' => 'isiNdebele',
+                    'hu' => 'Észak-ndebele',
+                ],
             ],
             [
                 'code' => 'ne',
-                'name' => 'Nepali',
-                'native_name' => 'नेपाली',
+                'name' => [
+                    'en' => 'Nepali',
+                    'ne' => 'नेपाली',
+                    'hu' => 'Nepáli',
+                ],
             ],
             [
                 'code' => 'ng',
-                'name' => 'Ndonga',
-                'native_name' => 'Owambo',
+                'name' => [
+                    'en' => 'Ndonga',
+                    'ng' => 'Owambo',
+                    'hu' => 'Ndonga',
+                ],
             ],
             [
                 'code' => 'nn',
-                'name' => 'Norwegian Nynorsk',
-                'native_name' => 'Norsk nynorsk',
+                'name' => [
+                    'en' => 'Norwegian Nynorsk',
+                    'nn' => 'Norsk nynorsk',
+                    'hu' => 'Norvég Nynorsk',
+                ],
             ],
             [
                 'code' => 'no',
-                'name' => 'Norwegian',
-                'native_name' => 'Norsk',
+                'name' => [
+                    'en' => 'Norwegian',
+                    'no' => 'Norsk',
+                    'hu' => 'Norvég',
+                ],
             ],
             [
                 'code' => 'ii',
-                'name' => 'Nuosu',
-                'native_name' => 'ꆈꌠ꒿ Nuosuhxop',
+                'name' => [
+                    'en' => 'Nuosu',
+                    'ii' => 'ꆈꌠ꒿ Nuosuhxop',
+                    'hu' => 'Nuoszu',
+                ],
             ],
             [
                 'code' => 'nr',
-                'name' => 'South Ndebele',
-                'native_name' => 'isiNdebele',
+                'name' => [
+                    'en' => 'South Ndebele',
+                    'nr' => 'isiNdebele',
+                    'hu' => 'Dél-ndebele',
+                ],
             ],
             [
                 'code' => 'oc',
-                'name' => 'Occitan',
-                'native_name' => 'Occitan',
+                'name' => [
+                    'en' => 'Occitan',
+                    'oc' => 'Occitan',
+                    'hu' => 'Okcitán',
+                ],
             ],
             [
                 'code' => 'oj',
-                'name' => 'Ojibwe, Ojibwa',
-                'native_name' => 'ᐊᓂᔑᓈᐯᒧᐎᓐ',
+                'name' => [
+                    'en' => 'Ojibwe, Ojibwa',
+                    'oj' => 'ᐊᓂᔑᓈᐯᒧᐎᓐ',
+                    'hu' => 'Ojibwa',
+                ],
             ],
             [
                 'code' => 'cu',
-                'name' => 'Old Church Slavonic, Church Slavic, Church Slavonic, Old Bulgarian, Old Slavonic',
-                'native_name' => 'ѩзыкъ словѣньскъ',
+                'name' => [
+                    'en' => 'Old Church Slavonic, Church Slavic, Church Slavonic, Old Bulgarian, Old Slavonic',
+                    'cu' => 'ѩзыкъ словѣньскъ',
+                    'hu' => 'Egyházi szláv',
+                ],
             ],
             [
                 'code' => 'om',
-                'name' => 'Oromo',
-                'native_name' => 'Afaan Oromoo',
+                'name' => [
+                    'en' => 'Oromo',
+                    'om' => 'Afaan Oromoo',
+                    'hu' => 'Oromo',
+                ],
             ],
             [
                 'code' => 'or',
-                'name' => 'Oriya',
-                'native_name' => 'ଓଡ଼ିଆ',
+                'name' => [
+                    'en' => 'Oriya',
+                    'or' => 'ଓଡ଼ିଆ',
+                    'hu' => 'Orija',
+                ],
             ],
             [
                 'code' => 'os',
-                'name' => 'Ossetian, Ossetic',
-                'native_name' => 'ирон æвзаг',
+                'name' => [
+                    'en' => 'Ossetian, Ossetic',
+                    'os' => 'ирон æвзаг',
+                    'hu' => 'Oszét',
+                ],
             ],
             [
                 'code' => 'pa',
-                'name' => 'Panjabi, Punjabi',
-                'native_name' => 'ਪੰਜਾਬੀ, پنجابی‎',
+                'name' => [
+                    'en' => 'Panjabi, Punjabi',
+                    'pa' => 'ਪੰਜਾਬੀ, پنجابی‎',
+                    'hu' => 'Pandzsábi',
+                ],
             ],
             [
                 'code' => 'pi',
-                'name' => 'Pāli',
-                'native_name' => 'पाऴि',
+                'name' => [
+                    'en' => 'Pāli',
+                    'pi' => 'पाऴि',
+                    'hu' => 'Páli',
+                ],
             ],
             [
                 'code' => 'fa',
-                'name' => 'Persian',
-                'native_name' => 'فارسی',
+                'name' => [
+                    'en' => 'Persian',
+                    'fa' => 'فارسی',
+                    'hu' => 'Perzsa',
+                ],
             ],
             [
                 'code' => 'pl',
-                'name' => 'Polish',
-                'native_name' => 'polski',
+                'name' => [
+                    'en' => 'Polish',
+                    'pl' => 'polski',
+                    'hu' => 'Lengyel',
+                ],
             ],
             [
                 'code' => 'ps',
-                'name' => 'Pashto, Pushto',
-                'native_name' => 'پښتو',
+                'name' => [
+                    'en' => 'Pashto, Pushto',
+                    'ps' => 'پښتو',
+                    'hu' => 'Pastu',
+                ],
             ],
             [
                 'code' => 'pt',
-                'name' => 'Portuguese',
-                'native_name' => 'Português',
+                'name' => [
+                    'en' => 'Portuguese',
+                    'pt' => 'Português',
+                    'hu' => 'Portugál',
+                ],
             ],
             [
                 'code' => 'qu',
-                'name' => 'Quechua',
-                'native_name' => 'Runa Simi, Kichwa',
+                'name' => [
+                    'en' => 'Quechua',
+                    'qu' => 'Runa Simi, Kichwa',
+                    'hu' => 'Kecsuva',
+                ],
             ],
             [
                 'code' => 'rm',
-                'name' => 'Romansh',
-                'native_name' => 'rumantsch grischun',
+                'name' => [
+                    'en' => 'Romansh',
+                    'rm' => 'rumantsch grischun',
+                    'hu' => 'Román',
+                ],
             ],
             [
                 'code' => 'rn',
-                'name' => 'Kirundi',
-                'native_name' => 'kiRundi',
+                'name' => [
+                    'en' => 'Kirundi',
+                    'rn' => 'kiRundi',
+                    'hu' => 'Kirundi',
+                ],
             ],
             [
                 'code' => 'ro',
-                'name' => 'Romanian, Moldavian, Moldovan',
-                'native_name' => 'română',
+                'name' => [
+                    'en' => 'Romanian, Moldavian, Moldovan',
+                    'ro' => 'română',
+                    'hu' => 'Román',
+                ],
             ],
             [
                 'code' => 'ru',
-                'name' => 'Russian',
-                'native_name' => 'русский язык',
+                'name' => [
+                    'en' => 'Russian',
+                    'ru' => 'русский язык',
+                    'hu' => 'Orosz',
+                ],
             ],
             [
                 'code' => 'sa',
-                'name' => 'Sanskrit (Saṁskṛta)',
-                'native_name' => 'संस्कृतम्',
+                'name' => [
+                    'en' => 'Sanskrit (Saṁskṛta)',
+                    'sa' => 'संस्कृतम्',
+                    'hu' => 'Szanszkrit',
+                ],
             ],
             [
                 'code' => 'sc',
-                'name' => 'Sardinian',
-                'native_name' => 'sardu',
+                'name' => [
+                    'en' => 'Sardinian',
+                    'sc' => 'sardu',
+                    'hu' => 'Szardíniai',
+                ],
             ],
             [
                 'code' => 'sd',
-                'name' => 'Sindhi',
-                'native_name' => 'सिन्धी, سنڌي، سندھی‎',
+                'name' => [
+                    'en' => 'Sindhi',
+                    'sd' => 'सिन्धी, سنڌي، سندھی‎',
+                    'hu' => 'Szindi',
+                ],
             ],
             [
                 'code' => 'se',
-                'name' => 'Northern Sami',
-                'native_name' => 'Davvisámegiella',
+                'name' => [
+                    'en' => 'Northern Sami',
+                    'se' => 'Davvisámegiella',
+                    'hu' => 'Északi számi',
+                ],
             ],
             [
                 'code' => 'sm',
-                'name' => 'Samoan',
-                'native_name' => 'gagana faa Samoa',
+                'name' => [
+                    'en' => 'Samoan',
+                    'sm' => 'gagana faa Samoa',
+                    'hu' => 'Szamoai',
+                ],
             ],
             [
                 'code' => 'sg',
-                'name' => 'Sango',
-                'native_name' => 'yângâ tî sängö',
+                'name' => [
+                    'en' => 'Sango',
+                    'sg' => 'yângâ tî sängö',
+                    'hu' => 'Szangó',
+                ],
             ],
             [
                 'code' => 'sr',
-                'name' => 'Serbian',
-                'native_name' => 'српски језик',
+                'name' => [
+                    'en' => 'Serbian',
+                    'sr' => 'српски језик',
+                    'hu' => 'Szerb',
+                ],
             ],
             [
                 'code' => 'gd',
-                'name' => 'Scottish Gaelic; Gaelic',
-                'native_name' => 'Gàidhlig',
+                'name' => [
+                    'en' => 'Scottish Gaelic; Gaelic',
+                    'gd' => 'Gàidhlig',
+                    'hu' => 'Skót gael',
+                ],
             ],
             [
                 'code' => 'sn',
-                'name' => 'Shona',
-                'native_name' => 'chiShona',
+                'name' => [
+                    'en' => 'Shona',
+                    'sn' => 'chiShona',
+                    'hu' => 'Shona',
+                ],
             ],
             [
                 'code' => 'si',
-                'name' => 'Sinhala, Sinhalese',
-                'native_name' => 'සිංහල',
+                'name' => [
+                    'en' => 'Sinhala, Sinhalese',
+                    'si' => 'සිංහල',
+                    'hu' => 'Szingaléz',
+                ],
             ],
             [
                 'code' => 'sk',
-                'name' => 'Slovak',
-                'native_name' => 'slovenčina',
+                'name' => [
+                    'en' => 'Slovak',
+                    'sk' => 'slovenčina',
+                    'hu' => 'Szlovák',
+                ],
             ],
             [
                 'code' => 'sl',
-                'name' => 'Slovene',
-                'native_name' => 'slovenščina',
+                'name' => [
+                    'en' => 'Slovene',
+                    'sl' => 'slovenščina',
+                    'hu' => 'Szlovén',
+                ],
             ],
             [
                 'code' => 'so',
-                'name' => 'Somali',
-                'native_name' => 'Soomaaliga, af Soomaali',
+                'name' => [
+                    'en' => 'Somali',
+                    'so' => 'Soomaaliga, af Soomaali',
+                    'hu' => 'Szomáli',
+                ],
             ],
             [
                 'code' => 'st',
-                'name' => 'Southern Sotho',
-                'native_name' => 'Sesotho',
+                'name' => [
+                    'en' => 'Southern Sotho',
+                    'st' => 'Sesotho',
+                    'hu' => 'Dél-szotó',
+                ],
             ],
             [
                 'code' => 'es',
-                'name' => 'Spanish; Castilian',
-                'native_name' => 'español, castellano',
+                'name' => [
+                    'en' => 'Spanish; Castilian',
+                    'es' => 'español, castellano',
+                    'hu' => 'Спанielski',
+                ],
             ],
             [
                 'code' => 'su',
-                'name' => 'Sundanese',
-                'native_name' => 'Basa Sunda',
+                'name' => [
+                    'en' => 'Sundanese',
+                    'su' => 'Basa Sunda',
+                    'hu' => 'Szundanéz',
+                ],
             ],
             [
                 'code' => 'sw',
-                'name' => 'Swahili',
-                'native_name' => 'Kiswahili',
+                'name' => [
+                    'en' => 'Swahili',
+                    'sw' => 'Kiswahili',
+                    'hu' => 'Szuahéli',
+                ],
             ],
             [
                 'code' => 'ss',
-                'name' => 'Swati',
-                'native_name' => 'SiSwati',
+                'name' => [
+                    'en' => 'Swati',
+                    'ss' => 'SiSwati',
+                    'hu' => 'Szuati',
+                ],
             ],
             [
                 'code' => 'sv',
-                'name' => 'Swedish',
-                'native_name' => 'svenska',
+                'name' => [
+                    'en' => 'Swedish',
+                    'sv' => 'svenska',
+                    'hu' => 'Svéd',
+                ],
             ],
             [
                 'code' => 'ta',
-                'name' => 'Tamil',
-                'native_name' => 'தமிழ்',
+                'name' => [
+                    'en' => 'Tamil',
+                    'ta' => 'தமிழ்',
+                    'hu' => 'Tamil',
+                ],
             ],
             [
                 'code' => 'te',
-                'name' => 'Telugu',
-                'native_name' => 'తెలుగు',
+                'name' => [
+                    'en' => 'Telugu',
+                    'te' => 'తెలుగు',
+                    'hu' => 'Telugu',
+                ],
             ],
             [
                 'code' => 'tg',
-                'name' => 'Tajik',
-                'native_name' => 'тоҷикӣ, toğikī, تاجیکی‎',
+                'name' => [
+                    'en' => 'Tajik',
+                    'tg' => 'тоҷикӣ, toğikī, تاجیکی‎',
+                    'hu' => 'Tádzsik',
+                ],
             ],
             [
                 'code' => 'th',
-                'name' => 'Thai',
-                'native_name' => 'ไทย',
+                'name' => [
+                    'en' => 'Thai',
+                    'th' => 'ไทย',
+                    'hu' => 'Thai',
+                ],
             ],
             [
                 'code' => 'ti',
-                'name' => 'Tigrinya',
-                'native_name' => 'ትግርኛ',
+                'name' => [
+                    'en' => 'Tigrinya',
+                    'ti' => 'ትግርኛ',
+                    'hu' => 'Tigrinya',
+                ],
             ],
             [
                 'code' => 'bo',
-                'name' => 'Tibetan Standard, Tibetan, Central',
-                'native_name' => 'བོད་ཡིག',
+                'name' => [
+                    'en' => 'Tibetan Standard, Tibetan, Central',
+                    'bo' => 'བོད་ཡིག',
+                    'hu' => 'Tibeti',
+                ],
             ],
             [
                 'code' => 'tk',
-                'name' => 'Turkmen',
-                'native_name' => 'Türkmen, Түркмен',
+                'name' => [
+                    'en' => 'Turkmen',
+                    'tk' => 'Türkmen, Түркмен',
+                    'hu' => 'Türkmén',
+                ],
             ],
             [
                 'code' => 'tl',
-                'name' => 'Tagalog',
-                'native_name' => 'Wikang Tagalog, ᜏᜒᜃᜅ᜔ ᜆᜄᜎᜓᜄ᜔',
+                'name' => [
+                    'en' => 'Tagalog',
+                    'tl' => 'Wikang Tagalog, ᜏᜒᜃᜅ᜔ ᜆᜄᜎᜓᜄ᜔',
+                    'hu' => 'Tagalog',
+                ],
             ],
             [
                 'code' => 'tn',
-                'name' => 'Tswana',
-                'native_name' => 'Setswana',
+                'name' => [
+                    'en' => 'Tswana',
+                    'tn' => 'Setswana',
+                    'hu' => 'Tswana',
+                ],
             ],
             [
                 'code' => 'to',
-                'name' => 'Tonga (Tonga Islands)',
-                'native_name' => 'faka Tonga',
+                'name' => [
+                    'en' => 'Tonga (Tonga Islands)',
+                    'to' => 'faka Tonga',
+                    'hu' => 'Tongai',
+                ],
             ],
             [
                 'code' => 'tr',
-                'name' => 'Turkish',
-                'native_name' => 'Türkçe',
+                'name' => [
+                    'en' => 'Turkish',
+                    'tr' => 'Türkçe',
+                    'hu' => 'Török',
+                ],
             ],
             [
                 'code' => 'ts',
-                'name' => 'Tsonga',
-                'native_name' => 'Xitsonga',
+                'name' => [
+                    'en' => 'Tsonga',
+                    'ts' => 'Xitsonga',
+                    'hu' => 'Tsonga',
+                ],
             ],
             [
                 'code' => 'tt',
-                'name' => 'Tatar',
-                'native_name' => 'татарча, tatarça, تاتارچا‎',
+                'name' => [
+                    'en' => 'Tatar',
+                    'tt' => 'татарча, tatarça, تاتارچا‎',
+                    'hu' => 'Tatár',
+                ],
             ],
             [
                 'code' => 'tw',
-                'name' => 'Twi',
-                'native_name' => 'Twi',
+                'name' => [
+                    'en' => 'Twi',
+                    'tw' => 'Twi',
+                    'hu' => 'Twi',
+                ],
             ],
             [
                 'code' => 'ty',
-                'name' => 'Tahitian',
-                'native_name' => 'Reo Tahiti',
+                'name' => [
+                    'en' => 'Tahitian',
+                    'ty' => 'Reo Tahiti',
+                    'hu' => 'Tahiti',
+                ],
             ],
             [
                 'code' => 'ug',
-                'name' => 'Uighur, Uyghur',
-                'native_name' => 'Uyƣurqə, ئۇيغۇرچە‎',
+                'name' => [
+                    'en' => 'Uighur, Uyghur',
+                    'ug' => 'Uyƣurqə, ئۇيغۇرچە‎',
+                    'hu' => 'Ujgur',
+                ],
             ],
             [
                 'code' => 'uk',
-                'name' => 'Ukrainian',
-                'native_name' => 'українська',
+                'name' => [
+                    'en' => 'Ukrainian',
+                    'uk' => 'українська',
+                    'hu' => 'Ukrán',
+                ],
             ],
             [
                 'code' => 'ur',
-                'name' => 'Urdu',
-                'native_name' => 'اردو',
+                'name' => [
+                    'en' => 'Urdu',
+                    'ur' => 'اردو',
+                    'hu' => 'Urdu',
+                ],
             ],
             [
                 'code' => 'uz',
-                'name' => 'Uzbek',
-                'native_name' => 'zbek, Ўзбек, أۇزبېك‎',
+                'name' => [
+                    'en' => 'Uzbek',
+                    'uz' => 'zbek, Ўзбек, أۇزبېك‎',
+                    'hu' => 'Üzbég',
+                ],
             ],
             [
                 'code' => 've',
-                'name' => 'Venda',
-                'native_name' => 'Tshivenḓa',
+                'name' => [
+                    'en' => 'Venda',
+                    've' => 'Tshivenḓa',
+                    'hu' => 'Venda',
+                ],
             ],
             [
                 'code' => 'vi',
-                'name' => 'Vietnamese',
-                'native_name' => 'Tiếng Việt',
+                'name' => [
+                    'en' => 'Vietnamese',
+                    'vi' => 'Tiếng Việt',
+                    'hu' => 'Vietnami',
+                ],
             ],
             [
                 'code' => 'vo',
-                'name' => 'Volapük',
-                'native_name' => 'Volapük',
+                'name' => [
+                    'en' => 'Volapük',
+                    'vo' => 'Volapük',
+                    'hu' => 'Volapük',
+                ],
             ],
             [
                 'code' => 'wa',
-                'name' => 'Walloon',
-                'native_name' => 'Walon',
+                'name' => [
+                    'en' => 'Walloon',
+                    'wa' => 'Walon',
+                    'hu' => 'Vallon',
+                ],
             ],
             [
                 'code' => 'cy',
-                'name' => 'Welsh',
-                'native_name' => 'Cymraeg',
+                'name' => [
+                    'en' => 'Welsh',
+                    'cy' => 'Cymraeg',
+                    'hu' => 'Walesi',
+                ],
             ],
             [
                 'code' => 'wo',
-                'name' => 'Wolof',
-                'native_name' => 'Wollof',
+                'name' => [
+                    'en' => 'Wolof',
+                    'wo' => 'Wollof',
+                    'hu' => 'Volof',
+                ],
             ],
             [
                 'code' => 'fy',
-                'name' => 'Western Frisian',
-                'native_name' => 'Frysk',
+                'name' => [
+                    'en' => 'Western Frisian',
+                    'fy' => 'Frysk',
+                    'hu' => 'Nyugat-fríz',
+                ],
             ],
             [
                 'code' => 'xh',
-                'name' => 'Xhosa',
-                'native_name' => 'isiXhosa',
+                'name' => [
+                    'en' => 'Xhosa',
+                    'xh' => 'isiXhosa',
+                    'hu' => 'Xhosa',
+                ],
             ],
             [
                 'code' => 'yi',
-                'name' => 'Yiddish',
-                'native_name' => 'ייִדיש',
+                'name' => [
+                    'en' => 'Yiddish',
+                    'yi' => 'ייִדיש',
+                    'hu' => 'Jiddis',
+                ],
             ],
             [
                 'code' => 'yo',
-                'name' => 'Yoruba',
-                'native_name' => 'Yorùbá',
+                'name' => [
+                    'en' => 'Yoruba',
+                    'yo' => 'Yorùbá',
+                    'hu' => 'Joruba',
+                ],
             ],
             [
                 'code' => 'za',
-                'name' => 'Zhuang, Chuang',
-                'native_name' => 'Saɯ cueŋƅ, Saw cuengh',
+                'name' => [
+                    'en' => 'Zhuang, Chuang',
+                    'za' => 'Saɯ cueŋƅ, Saw cuengh',
+                    'hu' => 'Zsuang',
+                ],
             ],
         ];
 
@@ -950,11 +1494,11 @@ class LanguageSeeder extends Seeder
         $languageRepository = app(LanguageRepositoryInterface::class);
         foreach ($languages as $languageData) {
             $language = $languageRepository->getByCode($languageData['code']);
-            $language->setCurrentCode('en');
-            $language->name = $languageData['name'];
-            $language->setCurrentCode($languageData['code']);
-            $language->name = $languageData['native_name'];
-            $language->save();
+            foreach ($languageData['name'] as $languageCode => $name) {
+                $language->setCurrentCode($languageCode);
+                $language->name = $name;
+                $language->save();
+            }
         }
     }
 }
