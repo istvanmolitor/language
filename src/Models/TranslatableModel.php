@@ -258,6 +258,20 @@ abstract class TranslatableModel extends Model
         }
     }
 
+    public function setRequestTranslations($request): void
+    {
+        $translations = $request['translations'];
+
+        $fields = $this->getTranslatableFields();
+        foreach ($translations as $langId => $translationData) {
+            foreach ($fields as $key) {
+                if (isset($translationData[$key])) {
+                    $this->setAttributeTranslation($key, $translationData[$key], (int) $langId);
+                }
+            }
+        }
+    }
+
     /****************************************************************************/
 
     public function save(array $options = []): bool
