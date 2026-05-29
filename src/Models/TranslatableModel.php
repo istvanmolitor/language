@@ -260,6 +260,10 @@ abstract class TranslatableModel extends Model
 
     public function setRequestTranslations($request): void
     {
+        if (! isset($request['translations'])) {
+            return;
+        }
+
         $translations = $request['translations'];
 
         $fields = $this->getTranslatableFields();
