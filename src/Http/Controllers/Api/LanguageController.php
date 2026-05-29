@@ -156,7 +156,7 @@ class LanguageController extends BaseAdminController
 
     public function create(): JsonResponse
     {
-        $availableLanguages = [$this->languageRepository->getDefaultLanguage()];
+        $availableLanguages = $this->languageRepository->getAll();
 
         return response()->json([
             'availableLanguages' => LanguageResource::collection($availableLanguages),
