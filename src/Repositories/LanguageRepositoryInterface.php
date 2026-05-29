@@ -28,4 +28,6 @@ interface LanguageRepositoryInterface
     public function getEnabledLanguages(): Collection;
 
     public function getAll(): Collection;
+
+    public function create(string $code, bool $enabled, string $nativeName, array $translations): Language;
 }

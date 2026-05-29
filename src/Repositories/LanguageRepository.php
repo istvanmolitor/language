@@ -108,4 +108,22 @@ class LanguageRepository implements LanguageRepositoryInterface
             ->where('enabled', 1)
             ->get();
     }
+
+    public function create(string $code, bool $enabled, string $nativeName, array $translations): Language
+    {
+        $language = $this->language->create([
+            'code' => $code,
+            'enabled' => $enabled,
+        ]);
+
+        $language->setAttributeTranslation('name', $nativeName, (int) $language->id);
+
+        foreach ($translations as $langId => $translationData) {
+            $language->setAttributeTranslation('name', $translationData['name'], (int) $langId);
+        }
+
+        $language->save();
+
+        return $language;
+    }
 }

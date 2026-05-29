@@ -19,6 +19,10 @@ class LanguageController extends BaseAdminController
 {
     use HasAdminFilters;
 
+    public function __construct(
+        private LanguageRepositoryInterface $languageRepository
+    ) {}
+
     #[OA\Get(
         path: '/api/admin/languages',
         summary: 'List all languages',
@@ -150,9 +154,9 @@ class LanguageController extends BaseAdminController
         ]);
     }
 
-    public function create(LanguageRepositoryInterface $languageRepository): JsonResponse
+    public function create(): JsonResponse
     {
-        $availableLanguages = [$languageRepository->getDefaultLanguage()];
+        $availableLanguages = [$this->languageRepository->getDefaultLanguage()];
 
         return response()->json([
             'availableLanguages' => LanguageResource::collection($availableLanguages),
@@ -185,18 +189,12 @@ class LanguageController extends BaseAdminController
     {
         $validated = $request->validated();
 
-        $language = Language::create([
-            'code' => $validated['code'],
-            'enabled' => $validated['enabled'] ?? true,
-        ]);
-
-        // Mentjük a saját nevét a saját nyelvén
-        $language->setAttributeTranslation('name', $validated['native_name'], (int) $language->id);
-
-        foreach ($validated['translations'] as $langId => $translationData) {
-            $language->setAttributeTranslation('name', $translationData['name'], (int) $langId);
-        }
-        $language->save();
+        $language = $this->languageRepository->create(
+            $validated['code'],
+            $validated['enabled'] ?? true,
+            $validated['native_name'],
+            $validated['translations'],
+        );
 
         $language->loadTranslations();
 

@@ -35,6 +35,8 @@ class DatabaseSeeder extends Seeder
 }
 ```
 
+
+
 ### Menüpont megjelenítése az admin menüben
 
 Ma a Menü modul telepítve van akkor meg lehet jeleníteni az admin menüben.
