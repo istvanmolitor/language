@@ -5,7 +5,7 @@ use Molitor\Language\Http\Controllers\Api\LanguageController;
 
 // Admin routes
 Route::prefix('admin')
-    ->middleware(['api', 'auth:sanctum'])
+    ->middleware(['api', 'auth:sanctum', 'permission:language'])
     ->name('language.admin.')
     ->group(function () {
         Route::get('languages', [LanguageController::class, 'index'])->name('languages.index');

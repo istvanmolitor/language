@@ -3,6 +3,7 @@
 namespace Molitor\Language\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(
@@ -30,7 +31,7 @@ class UpdateLanguageRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('acl', 'language');
     }
 
     public function rules(): array
