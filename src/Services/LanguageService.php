@@ -100,7 +100,7 @@ class LanguageService
     {
         $locale = session('locale');
         if ($locale === null) {
-            return null;
+            return $this->languageRepository->getDefaultLanguage();
         }
         $language = $this->languageRepository->getByCode($locale);
         if (! $language) {

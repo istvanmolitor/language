@@ -334,6 +334,35 @@ class LanguageController extends BaseAdminController
         ]);
     }
 
+    #[OA\Get(
+        path: '/api/admin/languages/{language}',
+        summary: 'Show a language',
+        tags: ['Languages'],
+        parameters: [
+            new OA\Parameter(name: 'language', in: 'path', required: true, schema: new OA\Schema(type: 'integer')),
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Success',
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: 'data', ref: '#/components/schemas/Language'),
+                    ]
+                )
+            ),
+            new OA\Response(response: 404, description: 'Not found'),
+        ]
+    )]
+    public function show(Language $language): JsonResponse
+    {
+        $language->loadTranslations();
+
+        return response()->json([
+            'data' => new LanguageResource($language),
+        ]);
+    }
+
     public function destroy(Language $language): JsonResponse
     {
         $language->delete();
