@@ -354,6 +354,19 @@ class LanguageController extends BaseAdminController
             new OA\Response(response: 404, description: 'Not found'),
         ]
     )]
+    public function default(LanguageRepositoryInterface $languageRepository): JsonResponse
+    {
+        $language = $languageRepository->getDefaultLanguage();
+
+        if ($language === null) {
+            return response()->json(['data' => null]);
+        }
+
+        $language->loadTranslations();
+
+        return response()->json(['data' => new LanguageResource($language)]);
+    }
+
     public function show(Language $language): JsonResponse
     {
         $language->loadTranslations();
