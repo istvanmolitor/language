@@ -21,6 +21,11 @@ class LanguageDataTable extends DataTable
         return LanguageResource::class;
     }
 
+    protected function getSearchPlaceholder(): string
+    {
+        return 'Keresés kód vagy név alapján...';
+    }
+
     protected function initColumns(): void
     {
         $this->addColumn('code')
