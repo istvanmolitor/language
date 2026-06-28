@@ -4,10 +4,11 @@ namespace Molitor\Language\Http\Controllers\Api;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Molitor\Admin\Http\Controllers\BaseAdminController;
-use Molitor\Admin\Http\Resources\DataTableResource;
 use Molitor\Admin\Http\Resources\OptionsResource;
 use Molitor\Admin\Traits\HasAdminFilters;
+use Molitor\Language\DataTables\LanguageDataTable;
 use Molitor\Language\Http\Requests\StoreLanguageRequest;
 use Molitor\Language\Http\Requests\UpdateLanguageRequest;
 use Molitor\Language\Http\Resources\LanguageResource;
@@ -53,23 +54,9 @@ class LanguageController extends BaseAdminController
             ),
         ]
     )]
-    public function index(Request $request): JsonResponse
+    public function index(LanguageDataTable $dataTable): AnonymousResourceCollection
     {
-        $query = Language::query();
-        $languages = $this->applyAdminFilters($query, $request, ['code'])
-            ->paginate($request->input('per_page', 10))
-            ->withQueryString();
-
-        // Betöltjük a fordításokat minden egyes elemhez a TranslatableModel-en keresztül
-        $items = collect($languages->items())->map(function ($language) {
-            $language->loadTranslations();
-
-            return $language;
-        });
-
-        $languages->setCollection($items);
-
-        return response()->json(new DataTableResource($languages, LanguageResource::class, $request->only(['search', 'sort', 'direction'])));
+        return $dataTable->getResponse();
     }
 
     #[OA\Get(
