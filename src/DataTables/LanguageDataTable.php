@@ -34,7 +34,8 @@ class LanguageDataTable extends DataTable
             ->setOrderable();
 
         $this->addColumn('name')
-            ->setLabel('Név');
+            ->setLabel('Név')
+            ->setSearchable();
 
         $this->addColumn('enabled')
             ->setLabel('Engedélyezve')
@@ -43,6 +44,6 @@ class LanguageDataTable extends DataTable
 
     public function query(Builder $query): Builder
     {
-        return $query->with('translations');
+        return $query->joinTranslation()->selectBase();
     }
 }

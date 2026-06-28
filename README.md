@@ -49,6 +49,26 @@ return [
 ];
 ```
 
+### DataTable – fordított mezők kereshetővé/rendezhetővé tétele
+
+Ha egy `TranslatableModel`-alapú entitás DataTable osztályában a fordított mezők (pl. `name`) kereshetőek vagy rendezhetőek kell legyenek, a `query()` metódusban használd a `TranslatableModel` scope-jait:
+
+```php
+public function query(Builder $query): Builder
+{
+    return $query->joinTranslation()->selectBase();
+}
+```
+
+Ezután az oszlopdefinícióban normálisan megadható a `->setSearchable()` és `->setOrderable()`:
+
+```php
+$this->addColumn('name')->setLabel('Név')->setSearchable()->setOrderable();
+```
+
+- `joinTranslation()` – leftJoin a fordítások táblájára az aktuális nyelv szerint, és betölti a `translations` kapcsolatot
+- `selectBase()` – `{table}.*` select az alaptáblára, hogy ne legyen oszlopütközés a joinolt mezőkkel
+
 ### Breadcrumb telepítése
 
 A language modul breadcrumbs.php fileját regisztrálni kell a configs/breadcrumbs.php fileban.
