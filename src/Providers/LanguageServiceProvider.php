@@ -33,6 +33,7 @@ class LanguageServiceProvider extends ServiceProvider
 
         // Register Blade components
         Blade::component('language-switcher', LanguageSwitcher::class);
+        Blade::component('language::language-switcher', LanguageSwitcher::class);
     }
 
     public function register()

@@ -41,6 +41,6 @@ class LanguageSwitcher extends Component
      */
     public function render(): View
     {
-        return view('language::components.language-switcher');
+        return template('language::components.language-switcher');
     }
 }
