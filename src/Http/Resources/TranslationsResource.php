@@ -26,10 +26,10 @@ class TranslationsResource extends JsonResource
     public function toArray(Request $request): array
     {
         $translations = [];
-        $allTranslations = $this->resource;
+        $savedTranslations = $this->resource;
 
-        if ($allTranslations) {
-            foreach ($allTranslations as $langId => $translation) {
+        if ($savedTranslations) {
+            foreach ($savedTranslations as $langId => $translation) {
                 $languageId = (int) ($translation->language_id ?? $langId);
                 $translations[(string) $languageId] = array_merge([
                     'language_id' => $languageId,

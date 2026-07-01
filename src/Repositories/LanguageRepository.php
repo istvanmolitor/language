@@ -96,16 +96,18 @@ class LanguageRepository implements LanguageRepositoryInterface
     {
         return $this->language
             ->joinTranslation()
-            ->selectBase()
             ->orderByTranslation('name')
+            ->selectBase()
             ->get();
     }
 
     public function getEnabledLanguages(): Collection
     {
         return $this->language
-            ->with('translations')
+            ->joinTranslation()
             ->where('enabled', 1)
+            ->orderByTranslation('name')
+            ->selectBase()
             ->get();
     }
 
