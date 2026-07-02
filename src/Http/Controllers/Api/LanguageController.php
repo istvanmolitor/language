@@ -29,13 +29,6 @@ class LanguageController extends BaseAdminController
     {
         return $dataTable->getResponse();
     }
-    
-    public function select(Request $request): AnonymousResourceCollection
-    {
-        $dataTable = app(LanguageSelectDataTable::class);
-        $dataTable->includeDisabled = $request->boolean('include_disabled', false);
-        return $dataTable->getResponse();
-    }
 
     public function store(StoreLanguageRequest $request): JsonResponse
     {
@@ -85,7 +78,7 @@ class LanguageController extends BaseAdminController
         ]);
     }
 
-    public function options()
+    public function select()
     {
         $languages = $this->languageRepository->getAll();
 
