@@ -7,6 +7,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class TranslationsResource extends JsonResource
 {
+    public $preserveKeys = true;
+
     /**
      * Create a new resource instance.
      *
