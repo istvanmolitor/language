@@ -2,10 +2,14 @@
 
 Nyelvek kezelése
 
-## Előfeltételek
+## Függőségek
 
-Telepíteni kell a következő modulokat.:
-- https://gitlab.com/molitor/user
+- `istvanmolitor/user` – git@github.com:istvanmolitor/user.git
+  A nyelvi jogosultságok/DataTable-ok a felhasználókezelésre épülnek.
+- `istvanmolitor/admin` – git@github.com:istvanmolitor/admin.git
+  Az admin felületi (`LanguageController`, `LanguageDataTable`) integrációhoz.
+- `istvanmolitor/menu` – git@github.com:istvanmolitor/menu.git
+  A `LanguageMenuBuilder` az admin menübe illeszti a nyelvek menüpontot.
 
 ## Telepítés
 
