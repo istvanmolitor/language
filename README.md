@@ -49,7 +49,7 @@ Ma a Menü modul telepítve van akkor meg lehet jeleníteni az admin menüben.
 <?php
 //Menü builderek listája:
 return [
-    \Molitor\Language\Services\Menu\LanguageMenuBuilder::class
+    \Molitor\Language\Services\LanguageMenuBuilder::class
 ];
 ```
 
@@ -72,13 +72,3 @@ $this->addColumn('name')->setLabel('Név')->setSearchable()->setOrderable();
 
 - `joinTranslation()` – leftJoin a fordítások táblájára az aktuális nyelv szerint, és betölti a `translations` kapcsolatot
 - `selectBase()` – `{table}.*` select az alaptáblára, hogy ne legyen oszlopütközés a joinolt mezőkkel
-
-### Breadcrumb telepítése
-
-A language modul breadcrumbs.php fileját regisztrálni kell a configs/breadcrumbs.php fileban.
-```php
-<?php
-'files' => [
-    base_path('/vendor/molitor/language/src/routes/breadcrumbs.php'),
-],
-```

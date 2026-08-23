@@ -1,6 +1,6 @@
 {
     "name": "istvanmolitor/language",
-    "description": "Language",
+    "description": "Multi-language and translation management, including locale switching and translatable Eloquent models, for the Molitor package suite.",
     "type": "library",
     "license": "MIT",
     "authors": [
